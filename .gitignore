@@ -1,0 +1,13 @@
+tmp/
+.vagrant
+apt/output/
+rpm/output
+diskimage/tesora-*
+appliance/tesora-*.d/
+appliance/tesora-*.qcow2
+fuel-plugin-tesora-dbaas/**/*.deb
+fuel-plugin-tesora-dbaas/**/*.rpm
+fuel-plugin-tesora-dbaas/**/*.tar.gz
+fuel-plugin-tesora-dbaas/.build
+fuel-plugin-tesora-dbaas/deployment_scripts/puppet/modules/tesora_dbaas/files/tesora-horizon*
+*~

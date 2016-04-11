@@ -1,0 +1,112 @@
+#
+# Copyright (c) 2016 Tesora Inc.  All Rights Reserved.
+#
+# All use, reproduction, transfer, publication or disclosure is prohibited
+# except as may be expressly permitted in the applicable license agreement.
+#
+
+- id: tesora-dbaas
+  type: group
+  role: [tesora-dbaas]
+  requires: [deploy_start]
+  required_for: [deploy_end]
+  tasks:
+    - fuel_pkgs
+    - hiera
+    - globals
+    - logging
+    - tools
+    - netconfig
+    - hosts
+    - firewall
+  parameters:
+    strategy:
+      type: parallel
+
+- id: tesora-dbaas-haproxy
+  type: puppet
+  groups: [primary-controller, controller]
+  requires: [deploy_start, cluster-haproxy, openstack-haproxy]
+  required_for: [deploy_end]
+  parameters:
+    puppet_manifest: puppet/manifests/haproxy.pp
+    puppet_modules: puppet/modules:/etc/puppet/modules
+    timeout: 1800
+
+- id: tesora-dbaas-db
+  type: puppet
+  groups: [primary-controller, controller]
+  requires: [primary-database, database]
+  required_for: [deploy_end]
+  parameters:
+    puppet_manifest: puppet/manifests/db.pp
+    puppet_modules: /etc/puppet/modules:puppet/modules
+    timeout: 1800
+
+- id: tesora-dbaas-keystone
+  type: puppet
+  groups: [primary-controller, controller]
+  requires: [primary-keystone, keystone]
+  required_for: [deploy_end]
+  parameters:
+    puppet_manifest: puppet/manifests/keystone.pp
+    puppet_modules: /etc/puppet/modules:puppet/modules
+    timeout: 1800
+
+- id: tesora-dbaas-install-packages
+  type: puppet
+  groups: [tesora-dbaas]
+  requires: [deploy_start, heat, horizon]
+  required_for: [deploy_end]
+  parameters:
+    puppet_manifest: puppet/manifests/install.pp
+    puppet_modules: /etc/puppet/modules:puppet/modules
+    timeout: 1800
+
+- id: tesora-dbaas-rabbitmq
+  type: puppet
+  groups: [tesora-dbaas]
+  requires: [tesora-dbaas-rabbitmq-cluster]
+  parameters:
+    puppet_manifest: puppet/manifests/rabbitmq.pp
+    puppet_modules: puppet/modules:/etc/puppet/modules
+    timeout: 1800
+
+- id: tesora-dbaas-rabbitmq-cluster
+  type: puppet
+  groups: [tesora-dbaas]
+  requires: [hosts, firewall, deploy_start]
+  parameters:
+    puppet_manifest: puppet/manifests/cluster.pp
+    puppet_modules: puppet/modules:/etc/puppet/modules
+    timeout: 1800
+
+- id: tesora-dbaas-configure
+  type: puppet
+  groups: [tesora-dbaas]
+  requires: [rabbitmq, tesora-dbaas-rabbitmq, tesora-dbaas-install-packages, tesora-dbaas-keystone, tesora-dbaas-db]
+  required_for: [deploy_end]
+  parameters:
+    puppet_manifest: puppet/manifests/configure.pp
+    puppet_modules: /etc/puppet/modules:puppet/modules
+    timeout: 1800
+
+- id: tesora-dbaas-db-sync
+  type: puppet
+  groups: [tesora-dbaas]
+  requires: [tesora-dbaas-configure, tesora-dbaas-db]
+  required_for: [deploy_end]
+  parameters:
+    puppet_manifest: puppet/manifests/db_sync.pp
+    puppet_modules: /etc/puppet/modules:puppet/modules
+    timeout: 1800
+
+- id: tesora-dbaas-horizon
+  type: puppet
+  groups: [primary-controller, controller]
+  requires: [horizon]
+  required_for: [deploy_end]
+  parameters:
+    puppet_manifest: puppet/manifests/install_horizon.pp
+    puppet_modules: /etc/puppet/modules:puppet/modules
+    timeout: 1800

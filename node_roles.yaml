@@ -1,0 +1,19 @@
+tesora-dbaas:
+  # Role name
+  name: "Tesora DBaaS Controller"
+  # Role description
+  description: "Tesora Database as a Service (DBaaS) platform is an enterprise-hardened version of OpenStack Trove, the native database service for OpenStack."
+  # If primaty then during orchestration this role will be
+  # splitted into primary-role and role
+  has_primary: false
+  # Assign public IP to node if true
+  public_ip_required: false
+  # Weight that will be used to sort out the
+  # roles on the Fuel web UI
+  weight: 100
+  update_required:
+    - trove
+    - controller
+  conflicts:
+    - controller
+    - compute

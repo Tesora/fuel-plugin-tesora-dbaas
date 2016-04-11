@@ -1,0 +1,77 @@
+#!/bin/bash
+set -eux
+
+if [ -z $FTP_USERNAME ]; then
+  echo "please supply FTP_USERNAME environment variable for download of software"
+  exit
+fi
+if [ -z $FTP_PASSWORD ]; then
+  echo "please supply FTP_PASSWORD environment variable for download of software"
+  exit
+fi
+
+ROOT="$(dirname `readlink -f $0`)"
+
+MODULES_DIR="${ROOT}"/deployment_scripts/puppet/modules
+RPM_REPO="${ROOT}"/repositories/centos/
+DEB_REPO="${ROOT}"/repositories/ubuntu/
+
+mkdir -p $RPM_REPO
+rm -f $RPM_REPO/*
+mkdir -p $DEB_REPO
+rm -f $DEB_REPO/*
+
+# Downloads needed RPM or DEB packages
+function download {
+    case "$1" in
+        deb) REPO=$DEB_REPO;;
+        rpm) REPO=$RPM_REPO;;
+    esac
+    shift
+
+    while [ $# -gt 0 ]; do
+        FILE=$(basename "$1")
+echo $FILE
+        wget -qO - $1 > "$REPO/$FILE"
+        shift
+    done
+}
+
+PACKAGES_URL="http://tesora-repos.tesora.com/repos/apt/ubuntu/dists/$DBAAS_RELEASE-$DBAAS_VERSION/$DBAAS_REPO/binary-amd64/Packages"
+DEB_URL_PREFIX="http://tesora-repos.tesora.com/repos/apt/ubuntu"
+
+curl -s $PACKAGES_URL | grep '^Filename' | cut -d' ' -f 2 | grep -v dashboard |
+while read line; do
+  download deb ${DEB_URL_PREFIX}/${line}
+done
+
+PLUGIN_NAME=tesora-horizon-plugin-${DBAAS_RELEASE_SHORT}-${DBAAS_VERSION}-liberty.tar.gz
+
+wget -O ${MODULES_DIR}/tesora_dbaas/files/$PLUGIN_NAME ftp://$FTP_USERNAME:$FTP_PASSWORD@ftp.tesora.com/${DBAAS_REPO}/$PLUGIN_NAME
+tar xvf ${MODULES_DIR}/tesora_dbaas/files/tesora-horizon-plugin-*.tar.gz -C ${MODULES_DIR}/tesora_dbaas/files
+rm ${MODULES_DIR}/tesora_dbaas/files/tesora-horizon-plugin-*.tar.gz
+
+
+# Create "fake" python-troveclient package with dependency on tesora-dbaas-client
+equivs-build "${ROOT}"/python-troveclient
+mv python-troveclient*.deb $DEB_REPO
+
+# patch out the replaces/conflicts/provides in original tesora-dbaas-client
+DEBFILE=`ls -1 $DEB_REPO/tesora-dbaas-client_*`
+OUTPUT=$DEBFILE
+TMPDIR=`mktemp -d /tmp/deb.XXXXXXXXXX` || exit 1
+
+dpkg-deb -x "$DEBFILE" "$TMPDIR"
+dpkg-deb --control "$DEBFILE" "$TMPDIR"/DEBIAN
+
+CONTROL="$TMPDIR"/DEBIAN/control
+
+for header in Provides Conflicts Replaces; do
+  sed -i.bak "/^$header:/d" "$CONTROL"
+done
+
+echo Building new deb...
+dpkg -b "$TMPDIR" "$OUTPUT"
+
+#rm -r "$TMPDIR"
+echo rm -r "$TMPDIR"
