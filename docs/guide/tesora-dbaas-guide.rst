@@ -59,25 +59,22 @@ To install the Tesora DBaaS Platform fuel plugin, follow these steps:
 #. Download the plugin from the `Fuel Plugins Catalog <https://www.mirantis.com/products/openstack-drivers-and-plugins/fuel-plugins/>`_.
 
 #. Copy the plugin to an already installed Fuel Master node:
-
    ::
 
-     > scp fuel-plugin-tesora-dbaas-1.7-1.7.2-1.noarch.rpm root@:<fuel master node IP>:/tmp
+     scp fuel-plugin-tesora-dbaas-1.7-1.7.2-1.noarch.rpm root@:<fuel master node IP>:/tmp
 
 #. Log into the Fuel Master node.
 
 #. Install the plugin
-
    ::
 
-     > cd /tmp
-     > fuel plugins --install fuel-plugin-tesora-dbaas-1.7-1.7.2-1.noarch.rpm
+     cd /tmp
+     fuel plugins --install fuel-plugin-tesora-dbaas-1.7-1.7.2-1.noarch.rpm
 
-#. Check if the plugin was installed successfully
-
+#. Check if the plugin was installed successfully.
    ::
 
-     > fuel plugins
+     fuel plugins
      id | name                     | version | package_version
      ---|--------------------------|---------|----------------
      1  | fuel-plugin-tesora-dbaas | 1.7.2   | 3.0.0
@@ -86,9 +83,9 @@ To install the Tesora DBaaS Platform fuel plugin, follow these steps:
    Select the `Plugins` tab at the top of the screen and verify that the Tesora DBaaS Platform plugin is loaded.
 
    .. image:: figures/installed-plugins.png
-         :width: 75%
+      :width: 75%
 
-#. Create a new Fuel environment using the Fuel UI Wizard
+#. Create a new Fuel environment using the Fuel UI Wizard.
 
 #. Within the environment you just created, open the Settings tab and select `Other` from the left-hand panel. Enable the Tesora DBaaS plugin, and enter values in the username and password fields.
 
@@ -99,23 +96,23 @@ To install the Tesora DBaaS Platform fuel plugin, follow these steps:
    You will also need to accept the `Tesora, Inc. Terms of Use` by entering `I AGREE` in the terms of use field.
 
    .. image:: figures/enable-plugin.png
-         :width: 75%
+      :width: 75%
 
 #. Now you can deploy nodes for Tesora DBaaS Platform. The plugin is designed to install the Tesora DBaaS Platform into a separate node.
 
    .. image:: figures/add-node.png
-         :width: 75%
+      :width: 75%
 
 #. Deploy your fuel environment containing the Tesora DBaaS Platform. Once provisioned launch Horizon. You should see additional screens in Horizon for Tesora Databases
 
    .. image:: figures/horizon-tesora.png
-         :width: 75%
+      :width: 75%
 
 
 User Guide
 ==========
 
-Tesora DBaaS Platform requires the user to download and install a `datastore guest iamge` prior to launching any databases.
+Tesora DBaaS Platform requires the user to download and install a `datastore guest image` prior to launching any databases.
 Tesora provides guest images for different types and versions of databases - see the full list <http://www.tesora.com/openstack-trove-certified-databases/>_.
 
 How to Install a datastore guest image
@@ -123,25 +120,22 @@ How to Install a datastore guest image
 
 To install a datastore for say `mysql 5.6`, follow these steps:
 
-#. Log in to the fuel node running the Tesora DBaaS Controller
+#. Log in to the fuel node running the Tesora DBaaS Controller.
 
-#. Change directory
-
+#. Change directory.
    ::
 
-     > cd /opt/tesora/dbaas/bin
+     cd /opt/tesora/dbaas/bin
 
-#. Source the `openrc.sh` file located in this directory
-
+#. Source the `openrc.sh` file located in this directory.
    ::
 
-     > source openrc.sh
+     source openrc.sh
 
-#. Run `add-datastore.sh` to download and install the datastore guest image you want
-
+#. Run `add-datastore.sh` to download and install the datastore guest image you want.
    ::
 
-     > ./add-datastore.sh mysql 5.6
+     ./add-datastore.sh mysql 5.6
 
      Installing guest 'tesora-ubuntu-trusty-mysql-5.6-EE-1.7'
 
@@ -229,42 +223,40 @@ How to view available datastores
 
 To view the installed and available datastores in horizon, follow these steps:
 
-#. Login to the Horizon console
+#. Login to the Horizon console.
 
-#. Navigate to Project -> Tesora Databases -> Datastores
+#. Navigate to Project -> Tesora Databases -> Datastores.
 
-#. The table shows the installed and available datastores
+#. The table shows the installed and available datastores.
 
    .. image:: figures/horizon-datastores.png
-        :width: 75%
+      :width: 75%
 
 How to create a database instance
 ---------------------------------
 
 To create a database instance based off an available datastore, follow these steps:
 
-#. Login to the Horizon console
+#. Login to the Horizon console.
 
-#. Navigate to Project -> Tesora Database -> Instances
+#. Navigate to Project -> Tesora Database -> Instances.
 
-#. Select the `Launch Instance` button
+#. Select the `Launch Instance` button.
 
-#. In the Launch Instance dialog enter Instance Name, Volume Size, Datastore and Flavor
+#. In the Launch Instance dialog enter Instance Name, Volume Size, Datastore and Flavor.
 
    .. image:: figures/horizon-launch1.png
-         :width: 75%
+      :width: 75%
 
-#. In the `Networking` ensure you launch your instance on a valid network
+#. In the `Networking` section, ensure you launch your instance on a valid network.
 
    .. image:: figures/horizon-launch2.png
-         :width: 75%
+      :width: 75%
 
 #. It may take a few minutes for your database to launch. When complete you should see:
 
    .. image:: figures/trove-instances.png
-         :width: 75%
-
-
+      :width: 75%
 
 Known issues
 ============
