@@ -1,12 +1,12 @@
 #!/bin/bash
 set -eux
 
-if [ -z $FTP_USERNAME ]; then
-  echo "please supply FTP_USERNAME environment variable for download of software"
+if [ -z $DBAAS_FTP_USERNAME ]; then
+  echo "please supply DBAAS_FTP_USERNAME environment variable for download of software"
   exit
 fi
-if [ -z $FTP_PASSWORD ]; then
-  echo "please supply FTP_PASSWORD environment variable for download of software"
+if [ -z $DBAAS_FTP_PASSWORD ]; then
+  echo "please supply DBAAS_FTP_PASSWORD environment variable for download of software"
   exit
 fi
 
@@ -47,7 +47,7 @@ done
 
 PLUGIN_NAME=tesora-horizon-plugin-${DBAAS_RELEASE_SHORT}-${DBAAS_VERSION}-liberty.tar.gz
 
-wget -O ${MODULES_DIR}/tesora_dbaas/files/$PLUGIN_NAME ftp://$FTP_USERNAME:$FTP_PASSWORD@ftp.tesora.com/${DBAAS_REPO}/$PLUGIN_NAME
+wget -O ${MODULES_DIR}/tesora_dbaas/files/$PLUGIN_NAME ftp://$DBAAS_FTP_USERNAME:$DBAAS_FTP_PASSWORD@ftp.tesora.com/${DBAAS_REPO}/$PLUGIN_NAME
 tar xvf ${MODULES_DIR}/tesora_dbaas/files/tesora-horizon-plugin-*.tar.gz -C ${MODULES_DIR}/tesora_dbaas/files
 rm ${MODULES_DIR}/tesora_dbaas/files/tesora-horizon-plugin-*.tar.gz
 
