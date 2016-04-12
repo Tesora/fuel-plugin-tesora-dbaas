@@ -1,4 +1,4 @@
-tesora-dbaas
+fuel-plugin-tesora-dbaas
 ============
 
 Plugin description
