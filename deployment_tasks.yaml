@@ -18,6 +18,9 @@
     - tools
     - netconfig
     - hosts
+    - ssl-dns-setup
+    - ssl-keys-saving
+    - ssl-add-trust-chain
     - firewall
   parameters:
     strategy:
