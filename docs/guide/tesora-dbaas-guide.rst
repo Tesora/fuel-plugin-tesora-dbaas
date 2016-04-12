@@ -40,8 +40,11 @@ Fuel                             8.x
 Pre-requisites
 --------------
 
-Use of the Tesora DBaaS Fuel plugin requires that you have previously registered
-for a trial of `Tesora DBaaS Enterprise Edition <http://resources.tesora.com/download-free-trial-tesora-dbaas-platform-enterprise-edition>`_.
+* This guide assumes that you have installed Fuel and all the nodes of your
+  future environment are discovered and functional.
+* Use of the Tesora DBaaS Fuel plugin requires that you have previously
+  registered for a trial of `Tesora DBaaS Enterprise Edition
+  <http://resources.tesora.com/download-free-trial-tesora-dbaas-platform-enterprise-edition>`_.
 
 Limitations
 -----------
@@ -61,20 +64,20 @@ To install the Tesora DBaaS Platform fuel plugin, follow these steps:
 #. Copy the plugin to an already installed Fuel Master node:
    ::
 
-     scp fuel-plugin-tesora-dbaas-1.7-1.7.2-1.noarch.rpm root@:<fuel master node IP>:/tmp
+     # scp fuel-plugin-tesora-dbaas-1.7-1.7.2-1.noarch.rpm root@:<fuel master node IP>:/tmp
 
 #. Log into the Fuel Master node.
 
 #. Install the plugin
    ::
 
-     cd /tmp
+     # cd /tmp
      fuel plugins --install fuel-plugin-tesora-dbaas-1.7-1.7.2-1.noarch.rpm
 
 #. Check if the plugin was installed successfully.
    ::
 
-     fuel plugins
+     # fuel plugins
      id | name                     | version | package_version
      ---|--------------------------|---------|----------------
      1  | fuel-plugin-tesora-dbaas | 1.7.2   | 3.0.0
@@ -125,17 +128,17 @@ To install a datastore for say `mysql 5.6`, follow these steps:
 #. Change directory.
    ::
 
-     cd /opt/tesora/dbaas/bin
+     # cd /opt/tesora/dbaas/bin
 
 #. Source the `openrc.sh` file located in this directory.
    ::
 
-     source openrc.sh
+     # source openrc.sh
 
 #. Run `add-datastore.sh` to download and install the datastore guest image you want.
    ::
 
-     ./add-datastore.sh mysql 5.6
+     # ./add-datastore.sh mysql 5.6
 
      Installing guest 'tesora-ubuntu-trusty-mysql-5.6-EE-1.7'
 
