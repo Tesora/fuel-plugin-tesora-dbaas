@@ -8,7 +8,7 @@ the **Tesora DBaaS Platform plugin for Fuel**.
 Tesora DBaas Platform
 =====================
 
-The Tesora DBaaS Platform Fuel plugin provides and automated method
+The Tesora DBaaS Platform Fuel plugin provides an automated method
 to deploy Tesora DBaaS components within Fuel. The plugin extends the Fuel
 Web UI to provide necessary configuration information fields.
 
