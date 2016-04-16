@@ -7,7 +7,7 @@ $queue_provider = hiera('queue_provider', 'rabbitmq')
 
 if $queue_provider == 'rabbitmq' {
   $trove_hash      = hiera_hash('fuel-plugin-tesora-dbaas', {})
-  $erlang_cookie   = hiera('erlang_cookie', 'EOKOWXQREETZSHFNTPEY')
+  $erlang_cookie   = hiera('erlang_cookie', 'EOKOWXQREETZSHFNTPEYT')
   $version         = hiera('rabbit_version', '3.3.5')
   $debug           = hiera('debug', false)
   $deployment_mode = hiera('deployment_mode', 'ha_compact')
