@@ -48,7 +48,7 @@ master_doc = 'tesora-dbaas-guide'
 
 # General information about the project.
 project = u'Tesora DBaaS Platform plugin for Fuel'
-copyright = u'2016, Tesora Inc.'
+copyright = u'2016, Tesora, Inc.'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -183,7 +183,7 @@ html_static_path = ['_static']
 htmlhelp_basename = 'NAME-doc'
 
 # -- Options for [rst2]pdf output ---------------------------------------------
-pdf_documents = [('tesora-dbaas-guide', u'tesora-dbaas-guide', u'Tesora DBaaS Platform plugin for Fuel Documentation', u'Tesora Inc.'),]
+pdf_documents = [('tesora-dbaas-guide', u'tesora-dbaas-guide', u'Tesora DBaaS Platform plugin for Fuel Documentation', u'Tesora, Inc.'),]
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -202,8 +202,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('tesora-dbaas-guide', 'name.tex', u'Tesora DBaaS Platform plugin for Fuel Documentation',
-   u'Tesora Inc.', 'manual'),
+  ('tesora-dbaas-guide', 'tesora-dbaas-guide.tex', u'Tesora DBaaS Platform plugin for Fuel Documentation',
+   u'Tesora, Inc.', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -237,7 +237,7 @@ latex_elements = { 'classoptions': ',openany,oneside', 'babel' : '\\usepackage[e
 # (source start file, name, description, authors, manual section).
 man_pages = [
     ('tesora-dbaas-guide', 'fuel-plugin-tesora-dbaas', u'Guide to the Tesora DBaaS Platform Plugin for Fuel',
-     [u'Tesora Inc.'], 1)
+     [u'Tesora, Inc.'], 1)
 ]
 
 # If true, show URL addresses after external links.
@@ -251,7 +251,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('tesora-dbaas-guide', 'fuel-plugin-tesora-dbaas', u'Tesora DBaaS Platform Plugin for Fuel Documentation',
-   u'Tesora Inc.', 'fuel-plugin-tesora-dbaas', 'Tesora DBaaS Platform Plugin for Fuel Documentation',
+   u'Tesora, Inc.', 'fuel-plugin-tesora-dbaas', 'Tesora DBaaS Platform Plugin for Fuel Documentation',
    'Miscellaneous'),
 ]
 
@@ -276,9 +276,9 @@ pdf_inline_footnotes = True
 # -- Options for Epub output ----------------------------------------------
 
 epub_title = u'Tesora DBaaS Platform Plugin for Fuel'
-epub_author = u'Tesora Inc.'
-epub_publisher = u'Tesora Inc.'
-epub_copyright = u'2016, Tesora Inc.'
+epub_author = u'Tesora, Inc.'
+epub_publisher = u'Tesora, Inc.'
+epub_copyright = u'2016, Tesora, Inc.'
 
 # The basename for the epub file. It defaults to the project name.
 #epub_basename = u'fuel-plugin-tesora-dbaas'
