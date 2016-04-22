@@ -34,7 +34,7 @@ Requirements
 ===============================  ===============
 Requirement                      Version/Comment
 ===============================  ===============
-Fuel                             8.x
+Fuel                             8.0
 ===============================  ===============
 
 Pre-requisites
@@ -42,6 +42,7 @@ Pre-requisites
 
 * This guide assumes that you have installed Fuel and all the nodes of your
   future environment are discovered and functional.
+
 * Use of the Tesora DBaaS Fuel plugin requires that you have previously
   registered for a trial of `Tesora DBaaS Enterprise Edition
   <http://resources.tesora.com/download-free-trial-tesora-dbaas-platform-enterprise-edition>`_.
@@ -57,56 +58,54 @@ Installation Guide
 Tesora DBaaS Platform plugin installation
 -----------------------------------------
 
-To install the Tesora DBaaS Platform fuel plugin, follow these steps:
+To install the Tesora DBaaS Platform Fuel plugin, follow these steps:
 
 #. Download the plugin from the `Fuel Plugins Catalog <https://www.mirantis.com/products/openstack-drivers-and-plugins/fuel-plugins/>`_.
 
-#. Copy the plugin to an already installed Fuel Master node:
-   ::
+#. Copy the plugin to an already installed
+   `Fuel Master node <http://docs.openstack.org/developer/fuel-docs/userdocs/fuel-install-guide/install_install_fuel.html>`_::
 
-     # scp fuel-plugin-tesora-dbaas-1.7-1.7.2-1.noarch.rpm root@:<fuel master node IP>:/tmp
+   # scp fuel-plugin-tesora-dbaas-1.7-1.7.2-1.noarch.rpm root@:/\<fuel master node IP>:/tmp
 
 #. Log into the Fuel Master node.
 
-#. Install the plugin
-   ::
+#. Install the plugin::
 
      # cd /tmp
      fuel plugins --install fuel-plugin-tesora-dbaas-1.7-1.7.2-1.noarch.rpm
 
-#. Check if the plugin was installed successfully.
-   ::
+#. Check if the plugin was installed successfully::
 
      # fuel plugins
      id | name                     | version | package_version
      ---|--------------------------|---------|----------------
      1  | fuel-plugin-tesora-dbaas | 1.7.2   | 3.0.0
 
-#. You can also check that the plugin is loaded via the Fuel Web UI.
-   Select the `Plugins` tab at the top of the screen and verify that the Tesora DBaaS Platform plugin is loaded.
-
-   .. image:: figures/installed-plugins.png
-      :width: 75%
-
 #. Create a new Fuel environment using the Fuel UI Wizard.
 
-#. Within the environment you just created, open the Settings tab and select `Other` from the left-hand panel. Enable the Tesora DBaaS plugin, and enter values in the username and password fields.
+#. Within the environment you just created, open the Settings tab of the Fuel Web UI
+   and select `Other` from the left-hand panel.
+   Enable the Tesora DBaaS plugin, and enter values in the username and password fields:
 
    .. Note::
-      You should have received a username and password from Tesora via email when you registered for your trial of Tesora DBaaS Enterprise Edition.
-      You can register for a 60 day trial `here <http://resources.tesora.com/download-free-trial-tesora-dbaas-platform-enterprise-edition>`_.
+      You should have received a username and password from Tesora via email
+      when you registered for your trial of Tesora DBaaS Enterprise Edition.
+      You can register for a 60 day trial
+      `here <http://resources.tesora.com/download-free-trial-tesora-dbaas-platform-enterprise-edition>`_.
 
    You will also need to accept the `Tesora, Inc. Terms of Use` by entering `I AGREE` in the terms of use field.
 
    .. image:: figures/enable-plugin.png
       :width: 75%
 
-#. Now you can deploy nodes for Tesora DBaaS Platform. The plugin is designed to install the Tesora DBaaS Platform into a separate node.
+#. Now you can deploy nodes for Tesora DBaaS Platform.
+   The plugin is designed to install the Tesora DBaaS Platform into a separate node:
 
    .. image:: figures/add-node.png
       :width: 75%
 
-#. Deploy your fuel environment containing the Tesora DBaaS Platform. Once provisioned launch Horizon. You should see additional screens in Horizon for Tesora Databases
+#. Deploy your Fuel environment containing the Tesora DBaaS Platform.
+   Once provisioned launch Horizon. You should see additional screens in Horizon for Tesora Databases:
 
    .. image:: figures/horizon-tesora.png
       :width: 75%
@@ -115,8 +114,9 @@ To install the Tesora DBaaS Platform fuel plugin, follow these steps:
 User Guide
 ==========
 
-Tesora DBaaS Platform requires the user to download and install a `datastore guest image` prior to launching any databases.
-Tesora provides guest images for different types and versions of databases - see the full list <http://www.tesora.com/openstack-trove-certified-databases/>_.
+Tesora DBaaS Platform requires the user to download and install a
+`datastore guest image` prior to launching any databases.
+Tesora provides guest images for different types and versions of databases - see the full `list <http://www.tesora.com/openstack-trove-certified-databases/>`_.
 
 How to Install a datastore guest image
 --------------------------------------
@@ -143,7 +143,8 @@ To install a datastore for say `mysql 5.6`, follow these steps:
      Installing guest 'tesora-ubuntu-trusty-mysql-5.6-EE-1.7'
 
      Downloading guest 'tesora-ubuntu-trusty-mysql-5.6-EE-1.7.guest'
-     --2016-04-07 19:38:22--  ftp://enterprise17:*password*@ftp.tesora.com/main/ubuntu/tesora-ubuntu-trusty-mysql-5.6-EE-1.7.guest
+     --2016-04-07 19:38:22--  ftp://enterprise17:*password*@ftp.tesora.com/main/ubuntu\
+     /tesora-ubuntu-trusty-mysql-5.6-EE-1.7.guest
                 => ‘/tmp/tmp.D8MAY4AlsW’
      Resolving ftp.tesora.com (ftp.tesora.com)... 199.182.122.232
      Connecting to ftp.tesora.com (ftp.tesora.com)|199.182.122.232|:21... connected.
@@ -151,10 +152,11 @@ To install a datastore for say `mysql 5.6`, follow these steps:
      ==> SYST ... done.    ==> PWD ... done.
      ==> TYPE I ... done.  ==> CWD (1) /main/ubuntu ... done.
      ==> SIZE tesora-ubuntu-trusty-mysql-5.6-EE-1.7.guest ... 510402560
-     ==> PASV ... done.    ==> RETR tesora-ubuntu-trusty-mysql-5.6-EE-1.7.guest ... done.
+     ==> PASV ... done.    ==> RETR tesora-ubuntu-trusty-mysql-5.6-EE-1.7.guest ... \
+     done.
      Length: 510402560 (487M) (unauthoritative)
 
-     100%[=======================================================================================================>] 510,402,560 4.14MB/s   in 98s
+     100%[=============================================================================================>] 510,402,560 4.14MB/s   in 98s
 
      2016-04-07 19:40:00 (4.95 MB/s) - ‘/tmp/tmp.D8MAY4AlsW’ saved [510402560]
 
@@ -191,7 +193,8 @@ To install a datastore for say `mysql 5.6`, follow these steps:
      | virtual_size              | None                                     |
      | visibility                | public                                   |
      +---------------------------+------------------------------------------+
-     Guest 'tesora-ubuntu-trusty-mysql-5.6-EE-1.7-86 uploaded to Glance with ID 'dfff7c84-136e-4889-b772-e690c23c8686'
+     Guest 'tesora-ubuntu-trusty-mysql-5.6-EE-1.7-86 uploaded to Glance with ID \
+     'dfff7c84-136e-4889-b772-e690c23c8686'
 
      Creating datastore 'mysql'
      No handlers could be found for logger "oslo_config.cfg"
@@ -261,7 +264,12 @@ To create a database instance based off an available datastore, follow these ste
    .. image:: figures/trove-instances.png
       :width: 75%
 
+Troubleshooting
+---------------
+
+<TBD>
+
 Known issues
-============
+------------
 
 <TBD>
