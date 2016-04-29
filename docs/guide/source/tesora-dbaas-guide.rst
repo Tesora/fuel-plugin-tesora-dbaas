@@ -267,7 +267,9 @@ To create a database instance based off an available datastore, follow these ste
 Troubleshooting
 ---------------
 
-<TBD>
+If add-datastore.sh fails with a `Login incorrect` error then most likely the username or password entered in the setting screen were incorrect.
+
+If trove instance fails to start, a common cause is using too small a flavor.  A flavor with at least 768M of RAM is required for mysql database.
 
 Known issues
 ------------
