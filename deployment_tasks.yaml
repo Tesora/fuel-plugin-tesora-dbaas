@@ -43,7 +43,7 @@
   required_for: [deploy_end]
   parameters:
     puppet_manifest: puppet/manifests/db.pp
-    puppet_modules: /etc/puppet/modules:puppet/modules
+    puppet_modules: puppet/modules:/etc/puppet/modules
     timeout: 1800
 
 - id: tesora-dbaas-keystone
@@ -53,7 +53,7 @@
   required_for: [deploy_end]
   parameters:
     puppet_manifest: puppet/manifests/keystone.pp
-    puppet_modules: /etc/puppet/modules:puppet/modules
+    puppet_modules: puppet/modules:/etc/puppet/modules
     timeout: 1800
 
 - id: tesora-dbaas-install-packages
@@ -63,7 +63,7 @@
   required_for: [deploy_end]
   parameters:
     puppet_manifest: puppet/manifests/install.pp
-    puppet_modules: /etc/puppet/modules:puppet/modules
+    puppet_modules: puppet/modules:/etc/puppet/modules
     timeout: 1800
 
 - id: tesora-dbaas-rabbitmq
@@ -91,7 +91,7 @@
   required_for: [deploy_end]
   parameters:
     puppet_manifest: puppet/manifests/configure.pp
-    puppet_modules: /etc/puppet/modules:puppet/modules
+    puppet_modules: puppet/modules:/etc/puppet/modules
     timeout: 1800
 
 - id: tesora-dbaas-db-sync
@@ -101,7 +101,7 @@
   required_for: [deploy_end]
   parameters:
     puppet_manifest: puppet/manifests/db_sync.pp
-    puppet_modules: /etc/puppet/modules:puppet/modules
+    puppet_modules: puppet/modules:/etc/puppet/modules
     timeout: 1800
 
 - id: tesora-dbaas-horizon
@@ -111,5 +111,5 @@
   required_for: [deploy_end]
   parameters:
     puppet_manifest: puppet/manifests/install_horizon.pp
-    puppet_modules: /etc/puppet/modules:puppet/modules
+    puppet_modules: puppet/modules:/etc/puppet/modules
     timeout: 1800
