@@ -1,4 +1,22 @@
-tesora-dbaas
+fuel-plugin-tesora-dbaas
 ============
 
-Plugin description
+This plugin installs Tesora DBaaS Platform within a Fuel 8.0 environment.
+Tesora Database as a Service (DBaaS) platform is an enterprise-hardened version of OpenStack Trove, the native database service for OpenStack. 
+This platform supports 13 popular databases.
+
+Features
+--------
+installs Trove services onto specified "DBaaS Controller" node(s)
+provides RabbitMQ cluster for Trove's use
+Stores state in controller's mysql cluster
+Provides highly available Trove services when using 3 or more DBaaS nodes
+
+Building the plugin
+--------------
+Building of this plugin is done by Tesora, Inc. 
+Tesora adds proprietary Trove packages into the plugin's repositories, and explicitly adds Tesora's horizon plugin.
+
+Current limitations
+--------------
+Only Ubuntu fuel environment is currently supported.
