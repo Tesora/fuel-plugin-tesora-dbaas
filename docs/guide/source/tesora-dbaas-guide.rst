@@ -50,7 +50,7 @@ Pre-requisites
 Limitations
 -----------
 
-<TBD>
+Shoud be specified at least "there is no known plugin's limitation".
 
 Installation Guide
 ==================
@@ -104,7 +104,7 @@ To install the Tesora DBaaS Platform Fuel plugin, follow these steps:
    .. image:: figures/add-node.png
       :width: 75%
 
-#. Deploy your Fuel environment containing the Tesora DBaaS Platform.
+#. Prior to deployment, network verification step shoud be added. Deploy your Fuel environment containing the Tesora DBaaS Platform.
    Once provisioned launch Horizon. You should see additional screens in Horizon for Tesora Databases:
 
    .. image:: figures/horizon-tesora.png
@@ -273,5 +273,9 @@ If trove instance fails to start, a common cause is using too small a flavor.  A
 
 Known issues
 ------------
-
+Also this chapter shouldn't be empty.
 <TBD>
+
+Appendix
+------------
+Add few URLs here at least to official Tesora, Mirantis web sites, etc...
