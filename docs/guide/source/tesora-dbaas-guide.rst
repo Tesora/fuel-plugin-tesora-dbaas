@@ -50,7 +50,8 @@ Pre-requisites
 Limitations
 -----------
 
-<TBD>
+This plugin currently supports only Ubuntu Fuel environments.
+
 
 Installation Guide
 ==================
@@ -72,7 +73,7 @@ To install the Tesora DBaaS Platform Fuel plugin, follow these steps:
 #. Install the plugin::
 
      # cd /tmp
-     fuel plugins --install fuel-plugin-tesora-dbaas-1.7-1.7.2-1.noarch.rpm
+     # fuel plugins --install fuel-plugin-tesora-dbaas-1.7-1.7.2-1.noarch.rpm
 
 #. Check if the plugin was installed successfully::
 
@@ -98,11 +99,13 @@ To install the Tesora DBaaS Platform Fuel plugin, follow these steps:
    .. image:: figures/enable-plugin.png
       :width: 75%
 
-#. Now you can deploy nodes for Tesora DBaaS Platform.
+#. Select nodes for Tesora DBaaS Platform.
    The plugin is designed to install the Tesora DBaaS Platform into a separate node:
 
    .. image:: figures/add-node.png
       :width: 75%
+
+#. Perform network validation on your new fuel environment.
 
 #. Deploy your Fuel environment containing the Tesora DBaaS Platform.
    Once provisioned launch Horizon. You should see additional screens in Horizon for Tesora Databases:
@@ -274,4 +277,9 @@ If trove instance fails to start, a common cause is using too small a flavor.  A
 Known issues
 ------------
 
-<TBD>
+Backup/Restore may not work with Ceph enabled object storage.
+Backup/Restore will not work with self-signed TLS configuration, fuel.local
+
+Appendix
+------------
+Add few URLs here at least to official Tesora, Mirantis web sites, etc...
