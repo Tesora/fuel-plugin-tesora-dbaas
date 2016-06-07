@@ -1,12 +1,6 @@
 attributes:
   metadata:
-    label: "Tesora DBaaS Platform"
-    mysql_password:
-      generator: 'password'
-    admin_password:
-      generator: 'password'
-    rabbit_password:
-      generator: 'password'
+    label: 'Tesora DBaaS Platform'
 
   tesora_guest_download_username:
     value: ''
@@ -25,9 +19,30 @@ attributes:
   tesora_accept_terms:
     weight: 90
     value: 'type "I AGREE"'
-    label: "Tesora DBaaS Terms Of Use"
-    description: "You have accepted the Tesora DBaaS Platform Terms Of Use"
+    label: 'Tesora DBaaS Terms Of Use'
+    description: 'You have accepted the Tesora DBaaS Platform Terms Of Use'
     type: 'text'
     regex: &tesora_acceptterms_regex
       source: '^I AGREE$'
       error: 'Type "I AGREE" to accept the Tesora Terms Of Use available at http://www.tesora.com/terms-of-use'
+
+  mysql_password:
+    type: hidden
+    value:
+      generator: 'password'
+    label: mysqlpass
+    weight: 101
+
+  admin_password:
+    type: hidden
+    value:
+      generator: 'password'
+    label: adminpass
+    weight: 102
+
+  rabbit_password:
+    type: hidden
+    value:
+      generator: 'password'
+    label: amqppass
+    weight: 103

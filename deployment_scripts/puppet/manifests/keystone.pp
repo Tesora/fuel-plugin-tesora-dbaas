@@ -12,8 +12,8 @@ $public_ssl_hash    = hiera('public_ssl')
 $public_vip         = hiera('public_vip')
 $admin_address      = hiera('management_vip')
 $api_bind_port      = '8779'
-$trove_admin_user   = pick($tesora_dbaas_hash['metadata']['admin_user'], 'trove')
-$trove_admin_pass   = $tesora_dbaas_hash['metadata']['admin_password']
+$trove_admin_user   = pick($tesora_dbaas_hash['admin_user'], 'trove')
+$trove_admin_pass   = $tesora_dbaas_hash['admin_password']
 $trove_admin_tenant = 'services'
 
 $region             = pick(hiera('region', 'RegionOne'))
