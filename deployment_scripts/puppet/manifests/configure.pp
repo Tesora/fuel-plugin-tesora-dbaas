@@ -71,7 +71,7 @@ $keystone_admin_url      = "${keystone_admin_protocol}://${keystone_admin_addres
 
 # ---------- RABBIT -----------------------------------------------
 $tesora_hash        = hiera_hash('fuel-plugin-tesora-dbaas')
-$amqp_port          = pick($tesora_hash['metadata']['rabbit_port'], '55671')
+$amqp_port          = pick($tesora_hash['rabbit_port'], '55671')
 # controller vip/haproxy is handling HA for rabbit
 $trove_rabbit_hosts = "${ip_management}:${amqp_port}"
 $trove_guest_rabbit_hosts = "${ip_public}:${amqp_port}"
@@ -89,12 +89,12 @@ $trove_public_url = "http://${ip_public}:8779"
 $trove_admin_url  = "http://${ip_management}:8779"
 
 # ---------- PLUGIN UI/metadata ----------------------------------
-$trove_mysql_user    = pick($tesora_hash['metadata']['mysql_user'], 'trove')
-$trove_mysql_pass    = $tesora_hash['metadata']['mysql_password']
-$trove_admin_user    = pick($tesora_hash['metadata']['admin_user'], 'trove')
-$trove_admin_pass    = $tesora_hash['metadata']['admin_password']
-$trove_rabbit_user   = pick($tesora_hash['metadata']['rabbit_user'], 'trove')
-$trove_rabbit_pass   = $tesora_hash['metadata']['rabbit_password']
+$trove_mysql_user    = pick($tesora_hash['mysql_user'], 'trove')
+$trove_mysql_pass    = $tesora_hash['mysql_password']
+$trove_admin_user    = pick($tesora_hash['admin_user'], 'trove')
+$trove_admin_pass    = $tesora_hash['admin_password']
+$trove_rabbit_user   = pick($tesora_hash['rabbit_user'], 'trove')
+$trove_rabbit_pass   = $tesora_hash['rabbit_password']
 $guest_download_user = $tesora_hash['tesora_guest_download_username']
 $guest_download_pass = $tesora_hash['tesora_guest_download_password']
 
@@ -102,7 +102,7 @@ $network_scheme      = hiera_hash('network_scheme', {})
 prepare_network_config($network_scheme)
 $trove_bind_host     = get_network_role_property('trove/api', 'ipaddr')
 
-$trove_admin_tenant = pick($tesora_hash['metadata']['tenant'], $nova_admin_tenant)
+$trove_admin_tenant = pick($tesora_hash['tenant'], $nova_admin_tenant)
 
 $trove_region     = hiera('region', 'RegionOne')
 

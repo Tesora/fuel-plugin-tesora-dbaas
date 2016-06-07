@@ -11,7 +11,7 @@ if $queue_provider == 'rabbitmq' {
   $version         = hiera('rabbit_version', '3.3.5')
   $debug           = hiera('debug', false)
   $deployment_mode = hiera('deployment_mode', 'ha_compact')
-  $amqp_port       = pick($trove_hash['metadata']['rabbit_port'], '55671')
+  $amqp_port       = pick($trove_hash['rabbit_port'], '55671')
   $rabbit_hash     = hiera_hash('rabbit_hash', {})
   $enabled         = pick($rabbit_hash['enabled'], true)
   $use_pacemaker   = pick($rabbit_hash['pacemaker'], true)
@@ -99,7 +99,7 @@ if $queue_provider == 'rabbitmq' {
       port                       => $amqp_port,
       delete_guest_user          => true,
       default_user               => 'trove',
-      default_pass               => $trove_hash['metadata']['rabbit_password'],
+      default_pass               => $trove_hash['rabbit_password'],
       # NOTE(bogdando) set to true and uncomment the lines below, if puppet should create a cluster
       # We don't want it as far as OCF script creates the cluster
       config_cluster             => false,
@@ -127,8 +127,8 @@ if $queue_provider == 'rabbitmq' {
       enabled        => $enabled,
       # Do not install rabbitmq from trove classes
       rabbitmq_class => false,
-      userid         => pick($trove_hash['metadata']['rabbit_user'], 'trove'),
-      password       => $trove_hash['metadata']['rabbit_password'],
+      userid         => pick($trove_hash['rabbit_user'], 'trove'),
+      password       => $trove_hash['rabbit_password'],
       require        => Class['::rabbitmq'],
     }
 
@@ -137,8 +137,8 @@ if $queue_provider == 'rabbitmq' {
         command_timeout => $command_timeout,
         debug           => $debug,
         erlang_cookie   => $erlang_cookie,
-        admin_user      => pick($trove_hash['metadata']['rabbit_user'], 'trove'),
-        admin_pass      => $trove_hash['metadata']['rabbit_password'],
+        admin_user      => pick($trove_hash['rabbit_user'], 'trove'),
+        admin_pass      => $trove_hash['rabbit_password'],
         before          => Class['tesora_dbaas::rabbitmq'],
       }
     }
