@@ -1,5 +1,5 @@
 **********************************************************************
-Guide to the Tesora DBaaS Platform Plugin version 1.7-1.7.2-1 for Fuel
+Guide to the Tesora DBaaS Platform Plugin version 1.7-1.7.7-1 for Fuel
 **********************************************************************
 
 This document provides instructions for installing, configuring and using
@@ -66,21 +66,21 @@ To install the Tesora DBaaS Platform Fuel plugin, follow these steps:
 #. Copy the plugin to an already installed
    `Fuel Master node <http://docs.openstack.org/developer/fuel-docs/userdocs/fuel-install-guide/install_install_fuel.html>`_::
 
-   # scp fuel-plugin-tesora-dbaas-1.7-1.7.2-1.noarch.rpm root@:/\<fuel master node IP>:/tmp
+   # scp fuel-plugin-tesora-dbaas-1.7-1.7.7-1.noarch.rpm root@:/\<fuel master node IP>:/tmp
 
 #. Log into the Fuel Master node.
 
 #. Install the plugin::
 
      # cd /tmp
-     # fuel plugins --install fuel-plugin-tesora-dbaas-1.7-1.7.2-1.noarch.rpm
+     # fuel plugins --install fuel-plugin-tesora-dbaas-1.7-1.7.7-1.noarch.rpm
 
 #. Check if the plugin was installed successfully::
 
      # fuel plugins
      id | name                     | version | package_version
      ---|--------------------------|---------|----------------
-     1  | fuel-plugin-tesora-dbaas | 1.7.2   | 3.0.0
+     1  | fuel-plugin-tesora-dbaas | 1.7.7   | 4.0.0
 
 #. Create a new Fuel environment using the Fuel UI Wizard.
 
@@ -182,7 +182,7 @@ To install a datastore for say `mysql 5.6`, follow these steps:
      | status                    | active                                   |
      | tags                      | []                                       |
      | tesora-agent-build        | 130                                      |
-     | tesora-agent-full-version | 1.7.2                                    |
+     | tesora-agent-full-version | 1.7.7                                    |
      | tesora-agent-version      | 1.7                                      |
      | tesora-database           | mysql                                    |
      | tesora-database-version   | 5.6                                      |
