@@ -22,7 +22,7 @@ class tesora_dbaas::db_sync (
   }
 
   exec { 'tesora_dbaas-dbsync':
-    command     => 'trove-manage --config-file=/etc/trove/trove_dbsync.conf db_sync',
+    command     => 'trove-manage --debug --config-file=/etc/trove/trove_dbsync.conf db_sync',
     path        => '/usr/bin',
     user        => 'root',
     refreshonly => true,
