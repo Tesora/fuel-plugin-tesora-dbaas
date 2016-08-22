@@ -19,14 +19,14 @@ $mysql_root_user     = pick($mysql_hash['root_user'], 'root')
 $mysql_db_create     = pick($mysql_hash['db_create'], true)
 $mysql_root_password = $mysql_hash['root_password']
 
-$db_user             = pick($tesora_dbaas_hash['metadata']['mysql_user'], 'trove')
-$db_name             = pick($tesora_dbaas_hash['metadata']['mysql_db_name'], 'trove')
-$db_password         = pick($tesora_dbaas_hash['metadata']['mysql_password'], $mysql_root_password)
+$db_user             = pick($tesora_dbaas_hash['mysql_user'], 'trove')
+$db_name             = pick($tesora_dbaas_hash['mysql_db_name'], 'trove')
+$db_password         = pick($tesora_dbaas_hash['mysql_password'], $mysql_root_password)
 
-$db_host             = pick($tesora_dbaas_hash['metadata']['mysql_db_host'], $database_vip)
-$db_create           = pick($tesora_dbaas_hash['metadata']['mysql_db_create'], $mysql_db_create)
-$db_root_user        = pick($tesora_dbaas_hash['metadata']['mysql_root_user'], $mysql_root_user)
-$db_root_password    = pick($tesora_dbaas_hash['metadata']['mysql_root_password'], $mysql_root_password)
+$db_host             = pick($tesora_dbaas_hash['mysql_db_host'], $database_vip)
+$db_create           = pick($tesora_dbaas_hash['mysql_db_create'], $mysql_db_create)
+$db_root_user        = pick($tesora_dbaas_hash['mysql_root_user'], $mysql_root_user)
+$db_root_password    = pick($tesora_dbaas_hash['mysql_root_password'], $mysql_root_password)
 
 # TODO: removed $node_name
 $allowed_hosts       = [ 'localhost', '127.0.0.1', '%' ]
