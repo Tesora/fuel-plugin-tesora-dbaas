@@ -2,7 +2,7 @@
 Standards-Version: 3.9.2
 
 Package: python-troveclient
-Version: 2:1.7.0
+Version: 2:1.9.0
 Section: misc
 Priority: optional
 Maintainer: Tesora Release <release@tesora.com>

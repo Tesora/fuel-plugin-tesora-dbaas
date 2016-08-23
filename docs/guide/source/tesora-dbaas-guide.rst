@@ -1,5 +1,5 @@
 **********************************************************************
-Guide to the Tesora DBaaS Platform Plugin version 1.7-1.7.7-1 for Fuel
+Guide to the Tesora DBaaS Platform Plugin version 1.9-1.9.1-1 for Fuel
 **********************************************************************
 
 This document provides instructions for installing, configuring and using
@@ -24,7 +24,7 @@ License
 ============================================  ==================
 Component                                     License type
 ============================================  ==================
-Tesora DBaaS Platform Enterprise Edition 1.7  Commercial
+Tesora DBaaS Platform Enterprise Edition 1.9  Commercial
 ============================================  ==================
 
 
@@ -66,21 +66,21 @@ To install the Tesora DBaaS Platform Fuel plugin, follow these steps:
 #. Copy the plugin to an already installed
    `Fuel Master node <http://docs.openstack.org/developer/fuel-docs/userdocs/fuel-install-guide/install_install_fuel.html>`_::
 
-   # scp fuel-plugin-tesora-dbaas-1.7-1.7.7-1.noarch.rpm root@:/\<fuel master node IP>:/tmp
+   # scp fuel-plugin-tesora-dbaas-1.9-1.9.1-1.noarch.rpm root@:/\<fuel master node IP>:/tmp
 
 #. Log into the Fuel Master node.
 
 #. Install the plugin::
 
      # cd /tmp
-     # fuel plugins --install fuel-plugin-tesora-dbaas-1.7-1.7.7-1.noarch.rpm
+     # fuel plugins --install fuel-plugin-tesora-dbaas-1.9-1.9.1-1.noarch.rpm
 
 #. Check if the plugin was installed successfully::
 
      # fuel plugins
      id | name                     | version | package_version
      ---|--------------------------|---------|----------------
-     1  | fuel-plugin-tesora-dbaas | 1.7.7   | 4.0.0
+     1  | fuel-plugin-tesora-dbaas | 1.9.1   | 4.0.0
 
 #. Create a new Fuel environment using the Fuel UI Wizard.
 
@@ -143,19 +143,19 @@ To install a datastore for say `mysql 5.6`, follow these steps:
 
      # ./add-datastore.sh mysql 5.6
 
-     Installing guest 'tesora-ubuntu-trusty-mysql-5.6-EE-1.7'
+     Installing guest 'tesora-ubuntu-trusty-mysql-5.6-EE-1.9'
 
-     Downloading guest 'tesora-ubuntu-trusty-mysql-5.6-EE-1.7.guest'
-     --2016-04-07 19:38:22--  ftp://enterprise17:*password*@ftp.tesora.com/main/ubuntu\
-     /tesora-ubuntu-trusty-mysql-5.6-EE-1.7.guest
+     Downloading guest 'tesora-ubuntu-trusty-mysql-5.6-EE-1.9.guest'
+     --2016-04-07 19:38:22--  ftp://enterprise19:*password*@ftp.tesora.com/main/ubuntu\
+     /tesora-ubuntu-trusty-mysql-5.6-EE-1.9.guest
                 => ‘/tmp/tmp.D8MAY4AlsW’
      Resolving ftp.tesora.com (ftp.tesora.com)... 199.182.122.232
      Connecting to ftp.tesora.com (ftp.tesora.com)|199.182.122.232|:21... connected.
-     Logging in as enterprise17 ... Logged in!
+     Logging in as enterprise19 ... Logged in!
      ==> SYST ... done.    ==> PWD ... done.
      ==> TYPE I ... done.  ==> CWD (1) /main/ubuntu ... done.
-     ==> SIZE tesora-ubuntu-trusty-mysql-5.6-EE-1.7.guest ... 510402560
-     ==> PASV ... done.    ==> RETR tesora-ubuntu-trusty-mysql-5.6-EE-1.7.guest ... \
+     ==> SIZE tesora-ubuntu-trusty-mysql-5.6-EE-1.9.guest ... 510402560
+     ==> PASV ... done.    ==> RETR tesora-ubuntu-trusty-mysql-5.6-EE-1.9.guest ... \
      done.
      Length: 510402560 (487M) (unauthoritative)
 
@@ -164,7 +164,7 @@ To install a datastore for say `mysql 5.6`, follow these steps:
      2016-04-07 19:40:00 (4.95 MB/s) - ‘/tmp/tmp.D8MAY4AlsW’ saved [510402560]
 
      Moving guest '/tmp/tmp.D8MAY4AlsW' into guest cache
-     Uploading guest 'tesora-ubuntu-trusty-mysql-5.6-EE-1.7-86' to Glance
+     Uploading guest 'tesora-ubuntu-trusty-mysql-5.6-EE-1.9-86' to Glance
      +---------------------------+------------------------------------------+
      | Property                  | Value                                    |
      +---------------------------+------------------------------------------+
@@ -175,15 +175,15 @@ To install a datastore for say `mysql 5.6`, follow these steps:
      | id                        | dfff7c84-136e-4889-b772-e690c23c8686     |
      | min_disk                  | 0                                        |
      | min_ram                   | 0                                        |
-     | name                      | tesora-ubuntu-trusty-mysql-5.6-EE-1.7-86 |
+     | name                      | tesora-ubuntu-trusty-mysql-5.6-EE-1.9-86 |
      | owner                     | 189b882e615b4ac998fc7fe7ddf25b79         |
      | protected                 | False                                    |
      | size                      | 510328832                                |
      | status                    | active                                   |
      | tags                      | []                                       |
      | tesora-agent-build        | 130                                      |
-     | tesora-agent-full-version | 1.7.7                                    |
-     | tesora-agent-version      | 1.7                                      |
+     | tesora-agent-full-version | 1.9.1                                    |
+     | tesora-agent-version      | 1.9                                      |
      | tesora-database           | mysql                                    |
      | tesora-database-version   | 5.6                                      |
      | tesora-edition            | enterprise                               |
@@ -196,7 +196,7 @@ To install a datastore for say `mysql 5.6`, follow these steps:
      | virtual_size              | None                                     |
      | visibility                | public                                   |
      +---------------------------+------------------------------------------+
-     Guest 'tesora-ubuntu-trusty-mysql-5.6-EE-1.7-86 uploaded to Glance with ID \
+     Guest 'tesora-ubuntu-trusty-mysql-5.6-EE-1.9-86 uploaded to Glance with ID \
      'dfff7c84-136e-4889-b772-e690c23c8686'
 
      Creating datastore 'mysql'
@@ -218,7 +218,7 @@ To install a datastore for say `mysql 5.6`, follow these steps:
      Add datastore complete...
 
      Guest image for mysql 5.6 uploaded to glance as:
-         Name: tesora-ubuntu-trusty-mysql-5.6-EE-1.7-86
+         Name: tesora-ubuntu-trusty-mysql-5.6-EE-1.9-86
          ID:   dfff7c84-136e-4889-b772-e690c23c8686
      mysql datastore created with version 5.6-86
      Done.
