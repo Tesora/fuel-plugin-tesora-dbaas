@@ -104,12 +104,12 @@
     puppet_modules: puppet/modules:/etc/puppet/modules
     timeout: 1800
 
-- id: tesora-dbaas-horizon
-  type: puppet
-  groups: [primary-controller, controller]
-  requires: [horizon]
-  required_for: [deploy_end]
-  parameters:
-    puppet_manifest: puppet/manifests/install_horizon.pp
-    puppet_modules: puppet/modules:/etc/puppet/modules
-    timeout: 1800
+#- id: tesora-dbaas-horizon
+#  type: puppet
+#  groups: [primary-controller, controller]
+#  requires: [horizon]
+#  required_for: [deploy_end]
+#  parameters:
+#    puppet_manifest: puppet/manifests/install_horizon.pp
+#    puppet_modules: puppet/modules:/etc/puppet/modules
+#    timeout: 1800
