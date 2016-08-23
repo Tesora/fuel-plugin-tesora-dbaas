@@ -54,7 +54,7 @@ class tesora_dbaas (
       guest_download_user => $guest_download_user,
       guest_download_pass => $guest_download_pass,
       dbaas_release => "enterprise",
-      dbaas_version => "1.7",
+      dbaas_version => "1.9",
       dbaas_repo => "main",
     }
 }
