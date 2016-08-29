@@ -38,7 +38,6 @@ keystone_user { $trove_admin_user:
   ensure   => present,
   enabled  => 'True',
   password => $trove_admin_pass,
-  tenant   => $trove_admin_tenant,
 }
 
 keystone_user_role { "${trove_admin_user}@${trove_admin_tenant}":
