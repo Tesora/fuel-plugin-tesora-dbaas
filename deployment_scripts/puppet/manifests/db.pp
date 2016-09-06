@@ -11,7 +11,7 @@ $node_name           = hiera('node_name')
 
 $tesora_dbaas_hash   = hiera_hash('fuel-plugin-tesora-dbaas')
 $trove_enabled       = pick($tesora_dbaas_hash['metadata']['enabled'], true)
-$mysql_hash          = hiera_hash('mysql_hash', {})
+$mysql_hash          = hiera_hash('mysql', {})
 
 $database_vip        = hiera('database_vip', undef)
 
