@@ -1,9 +1,5 @@
 notice('MODULAR: trove/cluster.pp')
 
-if !(hiera('role') in ['tesora-dbaas']) {
-    fail('The node role is not in trove roles')
-}
-
 $network_scheme = hiera_hash('network_scheme', {})
 $network_metadata = hiera_hash('network_metadata', {})
 
