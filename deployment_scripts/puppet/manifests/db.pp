@@ -35,7 +35,7 @@ validate_string($db_root_password)
 
 if $trove_enabled and $db_create {
 
-  class { 'galera::client':
+  class { 'openstack::galera::client':
     custom_setup_class => hiera('mysql_custom_setup_class', 'galera'),
   }
 
@@ -57,7 +57,7 @@ if $trove_enabled and $db_create {
     allowed_hosts => $allowed_hosts,
   }
 
-  Class['galera::client'] ->
+  Class['openstack::galera::client'] ->
     Class['osnailyfacter::mysql_access'] ->
       ::Openstacklib::Db::Mysql['trove']
 
