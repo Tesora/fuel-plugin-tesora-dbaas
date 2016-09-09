@@ -15,9 +15,17 @@ $corosync_nodes   = corosync_nodes($trove_node, 'trove/api')
 
 $network_ip       = get_network_role_property('trove/api', 'ipaddr')
 
-class { 'cluster':
-  internal_address => $network_ip,
-  corosync_nodes   => $corosync_nodes,
+$fuel_version = 0 + hiera('fuel_version')
+$cluster_recheck_interval = hiera('cluster_recheck_interval', '190s')
+
+$corosync_nodes_processed = corosync_nodes_process($corosync_nodes)
+
+class { '::cluster':
+  internal_address         => get_network_role_property('trove/api', 'ipaddr'),
+  quorum_members           => $corosync_nodes_processed['ips'],
+  unicast_addresses        => $corosync_nodes_processed['ips'],
+  quorum_members_ids       => $corosync_nodes_processed['ids'],
+  cluster_recheck_interval => $cluster_recheck_interval,
 }
 
 pcmk_nodes { 'pacemaker' :
