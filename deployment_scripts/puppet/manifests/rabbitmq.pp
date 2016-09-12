@@ -3,9 +3,9 @@ notice('MODULAR: trove/rabbitmq.pp')
 $network_scheme = hiera_hash('network_scheme', {})
 prepare_network_config($network_scheme)
 
-$queue_provider = hiera('queue_provider', 'rabbitmq')
+$queue_provider = hiera('queue_provider', 'rabbit')
 
-if $queue_provider == 'rabbitmq' {
+if $queue_provider == 'rabbit' {
   $trove_hash      = hiera_hash('fuel-plugin-tesora-dbaas', {})
   $erlang_cookie   = hiera('erlang_cookie', 'EOKOWXQREETZSHFNTPEYT')
   $version         = hiera('rabbit_version', '3.3.5')
