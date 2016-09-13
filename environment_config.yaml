@@ -28,22 +28,25 @@ attributes:
       error: 'Type "I AGREE" to accept the Tesora Terms Of Use available at http://www.tesora.com/terms-of-use'
 
   mysql_password:
-    type: hidden
+    label: ""
+    description: ""
+    type: 'hidden'
     value:
       generator: 'password'
-    label: mysqlpass
     weight: 101
 
   admin_password:
-    type: hidden
+    label: ""
+    description: ""
+    type: 'hidden'
     value:
       generator: 'password'
-    label: adminpass
     weight: 102
 
   rabbit_password:
-    type: hidden
+    label: ""
+    description: ""
+    type: 'hidden'
     value:
       generator: 'password'
-    label: amqppass
     weight: 103
