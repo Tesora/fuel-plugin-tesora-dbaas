@@ -29,7 +29,6 @@ $public_protocol = $public_ssl_hash['services'] ? {
 $public_url         = "${public_protocol}://${public_address}:${api_bind_port}/v1.0/%(tenant_id)s"
 $admin_url          = "http://${admin_address}:${api_bind_port}/v1.0/%(tenant_id)s"
 
-notice ("public $public_url admin $admin_url . $region")
 Class['::osnailyfacter::wait_for_keystone_backends'] -> Keystone_service['trove']
 
 class {'::osnailyfacter::wait_for_keystone_backends':}
@@ -51,7 +50,7 @@ keystone_service {'trove':
   description => 'Tesora DBaaS Platform',
 }
 
-keystone_endpoint {"$region/trove":
+keystone_endpoint {"${region}/trove":
   ensure       => present,
   public_url   => $public_url,
   admin_url    => $admin_url,

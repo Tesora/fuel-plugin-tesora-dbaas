@@ -9,7 +9,7 @@ class tesora_dbaas::start_services {
 
   Service { ensure => running, enable => true }
 
-  if $operatingsystem == "Ubuntu" {
+  if $::operatingsystem == 'Ubuntu' {
     service { 'trove-api': }
     service { 'trove-taskmanager': }
     service { 'trove-conductor': }

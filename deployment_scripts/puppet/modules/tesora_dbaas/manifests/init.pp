@@ -42,19 +42,19 @@ class tesora_dbaas (
 ) {
     notice ('tesora_dbaas::init.pp')
 
-    Class['tesora_dbaas::configure'] -> Class['tesora_dbaas::config_client'] 
+    Class['tesora_dbaas::configure'] -> Class['tesora_dbaas::config_client']
 
     class { 'tesora_dbaas::configure': }
 
     class { 'tesora_dbaas::config_client':
-      os_auth_url => $keystone_public_url,
-      os_user => $keystone_admin_user,
-      os_pass => $keystone_admin_pass,
-      os_tenant_name => $keystone_admin_tenant,
+      os_auth_url         => $keystone_public_url,
+      os_user             => $keystone_admin_user,
+      os_pass             => $keystone_admin_pass,
+      os_tenant_name      => $keystone_admin_tenant,
       guest_download_user => $guest_download_user,
       guest_download_pass => $guest_download_pass,
-      dbaas_release => "enterprise",
-      dbaas_version => "1.9",
-      dbaas_repo => "main",
+      dbaas_release       => 'enterprise',
+      dbaas_version       => '1.9',
+      dbaas_repo          => 'main',
     }
 }

@@ -77,9 +77,9 @@ if $queue_provider == 'rabbitmq' {
   $thread_pool_calc = min(100,max(12*$physicalprocessorcount,30))
 
   if $deployment_mode == 'ha_compact' {
-    $rabbit_pid_file                   = '/var/run/rabbitmq/p_pid'
+    $rabbit_pid_file = '/var/run/rabbitmq/p_pid'
     } else {
-    $rabbit_pid_file                   = '/var/run/rabbitmq/pid'
+    $rabbit_pid_file = '/var/run/rabbitmq/pid'
   }
   $environment_variables = hiera('rabbit_environment_variables',
     {
@@ -90,29 +90,29 @@ if $queue_provider == 'rabbitmq' {
 
   if ($enabled) {
     class { '::rabbitmq':
-      admin_enable               => true,
-      repos_ensure               => false,
-      package_provider           => $package_provider,
-      package_source             => undef,
-      service_ensure             => 'running',
-      service_manage             => true,
-      port                       => $amqp_port,
-      delete_guest_user          => true,
-      default_user               => 'trove',
-      default_pass               => $trove_hash['rabbit_password'],
+      admin_enable            => true,
+      repos_ensure            => false,
+      package_provider        => $package_provider,
+      package_source          => undef,
+      service_ensure          => 'running',
+      service_manage          => true,
+      port                    => $amqp_port,
+      delete_guest_user       => true,
+      default_user            => 'trove',
+      default_pass            => $trove_hash['rabbit_password'],
       # NOTE(bogdando) set to true and uncomment the lines below, if puppet should create a cluster
       # We don't want it as far as OCF script creates the cluster
-      config_cluster             => false,
-      #erlang_cookie              => $erlang_cookie,
-      #wipe_db_on_cookie_change   => true,
-      #cluster_nodes              => $rabbitmq_cluster_nodes,
-      #cluster_node_type          => 'disc',
+      config_cluster          => false,
+      #erlang_cookie          => $erlang_cookie,
+      #wipe_db_on_cookie_change => true,
+      #cluster_nodes          => $rabbitmq_cluster_nodes,
+      #cluster_node_type      => 'disc',
       #cluster_partition_handling => $cluster_partition_handling,
-      version                    => $version,
-      node_ip_address            => $rabbitmq_bind_ip_address,
-      config_kernel_variables    => $config_kernel_variables,
-      config_variables           => $config_variables,
-      environment_variables      => $environment_variables,
+      version                 => $version,
+      node_ip_address         => $rabbitmq_bind_ip_address,
+      config_kernel_variables => $config_kernel_variables,
+      config_variables        => $config_variables,
+      environment_variables   => $environment_variables,
     }
 
     if ($use_pacemaker) {

@@ -109,47 +109,47 @@ $trove_region     = hiera('region', 'RegionOne')
 $primary_controller = hiera('primary_controller')
 
 class { 'tesora_dbaas':
-  primary_controller => $primary_controller,
-  keystone_admin_url => $keystone_admin_url,
-  keystone_public_url => $keystone_public_url,
-  keystone_admin_user => $keystone_admin_user,
-  keystone_admin_pass => $keystone_admin_pass,
+  primary_controller    => $primary_controller,
+  keystone_admin_url    => $keystone_admin_url,
+  keystone_public_url   => $keystone_public_url,
+  keystone_admin_user   => $keystone_admin_user,
+  keystone_admin_pass   => $keystone_admin_pass,
   keystone_admin_tenant => $keystone_admin_tenant,
 
-  trove_public_url => $trove_public_url,
-  trove_admin_url => $trove_admin_url,
+  trove_public_url      => $trove_public_url,
+  trove_admin_url       => $trove_admin_url,
 
-  trove_bind_host => $trove_bind_host,
+  trove_bind_host       => $trove_bind_host,
 
-  trove_region     => $trove_region,
-  trove_mysql_user => $trove_mysql_user,
-  trove_mysql_pass => $trove_mysql_pass,
+  trove_region          => $trove_region,
+  trove_mysql_user      => $trove_mysql_user,
+  trove_mysql_pass      => $trove_mysql_pass,
 
-  trove_admin_user   => $trove_admin_user,
-  trove_admin_pass   => $trove_admin_pass,
-  trove_admin_tenant => $trove_admin_tenant,
+  trove_admin_user      => $trove_admin_user,
+  trove_admin_pass      => $trove_admin_pass,
+  trove_admin_tenant    => $trove_admin_tenant,
 
-  cinder_url => $cinder_internal_url,
+  cinder_url            => $cinder_internal_url,
 
-  swift_admin_url => $swift_internal_url,
-  swift_public_url => $swift_public_url,
+  swift_admin_url       => $swift_internal_url,
+  swift_public_url      => $swift_public_url,
 
-  nova_url    => $nova_internal_url,
-  nova_user   => $nova_admin_user,
-  nova_pass   => $nova_admin_pass,
-  nova_tenant => $nova_admin_tenant,
+  nova_url              => $nova_internal_url,
+  nova_user             => $nova_admin_user,
+  nova_pass             => $nova_admin_pass,
+  nova_tenant           => $nova_admin_tenant,
 
-  rabbit_hosts => $trove_rabbit_hosts,
-  rabbit_user  => $trove_rabbit_user,
-  rabbit_pass  => $trove_rabbit_pass,
+  rabbit_hosts          => $trove_rabbit_hosts,
+  rabbit_user           => $trove_rabbit_user,
+  rabbit_pass           => $trove_rabbit_pass,
 
-  guest_rabbit_hosts => $trove_guest_rabbit_hosts,
-  controller_host => $keystone_admin_address,
+  guest_rabbit_hosts    => $trove_guest_rabbit_hosts,
+  controller_host       => $keystone_admin_address,
 
-  mysql_host_port  => $mysql_host_port,
-  mysql_admin_user => $mysql_admin_user,
-  mysql_admin_pass => $mysql_admin_pass,
+  mysql_host_port       => $mysql_host_port,
+  mysql_admin_user      => $mysql_admin_user,
+  mysql_admin_pass      => $mysql_admin_pass,
 
-  guest_download_user => $guest_download_user,
-  guest_download_pass => $guest_download_pass,
+  guest_download_user   => $guest_download_user,
+  guest_download_pass   => $guest_download_pass,
 }

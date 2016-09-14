@@ -22,7 +22,7 @@ class { '::cluster':
 }
 
 pcmk_nodes { 'pacemaker' :
-  nodes => $corosync_nodes,
+  nodes               => $corosync_nodes,
   add_pacemaker_nodes => false,
 }
 

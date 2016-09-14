@@ -16,7 +16,7 @@ class tesora_dbaas::config_client (
     $dbaas_version = undef,
     $dbaas_repo = undef,
 ) {
-  file { "/opt/tesora/dbaas/bin/openrc.sh":
+  file { '/opt/tesora/dbaas/bin/openrc.sh':
     ensure  => file,
     content => template('tesora_dbaas/openrc.sh.erb')
   }
