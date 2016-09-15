@@ -14,7 +14,7 @@ if $queue_provider == 'rabbitmq' {
   $amqp_port       = pick($trove_hash['rabbit_port'], '55671')
   $rabbit_hash     = hiera_hash('rabbit_hash', {})
   $enabled         = pick($rabbit_hash['enabled'], true)
-  $use_pacemaker   = pick($rabbit_hash['pacemaker'], true)
+  $use_pacemaker   = false
 
   case $::osfamily {
     'RedHat': {
