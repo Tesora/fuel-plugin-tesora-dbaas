@@ -26,6 +26,16 @@
     strategy:
       type: parallel
 
+- id: tesora-dbaas-configure-repo
+  type: puppet
+  groups: [primary-controller, controller, tesora-dbaas]
+  requires: [deploy_start]
+  required_for: [primary-heat, heat, tesora-dbaas-install-packages, deploy_end]
+  parameters:
+    puppet_manifest: puppet/manifests/repo.pp
+    puppet_modules: puppet/modules:/etc/puppet/modules
+    timeout: 1800
+
 - id: tesora-dbaas-haproxy
   type: puppet
   groups: [primary-controller, controller]
@@ -59,7 +69,7 @@
 - id: tesora-dbaas-install-packages
   type: puppet
   groups: [tesora-dbaas]
-  requires: [deploy_start, heat, horizon]
+  requires: [deploy_start, tesora-dbaas-configure-repo, heat, horizon]
   required_for: [deploy_end]
   parameters:
     puppet_manifest: puppet/manifests/install.pp
