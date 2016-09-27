@@ -30,7 +30,7 @@
   type: puppet
   groups: [primary-controller, controller, tesora-dbaas]
   requires: [deploy_start]
-  required_for: [primary-heat, heat, tesora-dbaas-install-packages, deploy_end]
+  required_for: [primary-heat, heat, deploy_end]
   parameters:
     puppet_manifest: puppet/manifests/repo.pp
     puppet_modules: puppet/modules:/etc/puppet/modules
@@ -51,8 +51,6 @@
   groups: [primary-controller, controller]
   requires: [primary-database, database]
   required_for: [deploy_end]
-  cross-depended-by:
-    - name: tesora-dbaas-db-sync
   parameters:
     puppet_manifest: puppet/manifests/db.pp
     puppet_modules: puppet/modules:/etc/puppet/modules
@@ -99,8 +97,11 @@
 - id: tesora-dbaas-configure
   type: puppet
   groups: [tesora-dbaas]
-  requires: [rabbitmq, tesora-dbaas-rabbitmq, tesora-dbaas-install-packages, tesora-dbaas-keystone, tesora-dbaas-db]
+  requires: [rabbitmq, tesora-dbaas-rabbitmq, tesora-dbaas-install-packages]
   required_for: [deploy_end]
+  cross-depends:
+    - name: tesora-dbaas-keystone
+    - name: tesora-dbaas-db
   parameters:
     puppet_manifest: puppet/manifests/configure.pp
     puppet_modules: puppet/modules:/etc/puppet/modules
@@ -109,7 +110,7 @@
 - id: tesora-dbaas-db-sync
   type: puppet
   groups: [tesora-dbaas]
-  requires: [tesora-dbaas-configure, tesora-dbaas-db]
+  requires: [tesora-dbaas-configure]
   required_for: [deploy_end]
   cross-depends:
     - name: tesora-dbaas-db
