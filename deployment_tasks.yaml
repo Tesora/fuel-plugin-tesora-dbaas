@@ -51,6 +51,8 @@
   groups: [primary-controller, controller]
   requires: [primary-database, database]
   required_for: [deploy_end]
+  cross-depended-by:
+    - name: tesora-dbaas-db-sync
   parameters:
     puppet_manifest: puppet/manifests/db.pp
     puppet_modules: puppet/modules:/etc/puppet/modules
@@ -109,6 +111,8 @@
   groups: [tesora-dbaas]
   requires: [tesora-dbaas-configure, tesora-dbaas-db]
   required_for: [deploy_end]
+  cross-depends:
+    - name: tesora-dbaas-db
   parameters:
     puppet_manifest: puppet/manifests/db_sync.pp
     puppet_modules: puppet/modules:/etc/puppet/modules
