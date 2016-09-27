@@ -66,7 +66,5 @@ if $trove_enabled and $db_create {
   }
 }
 
-class mysql::config{}
-include mysql::config
-class mysql::server{}
-include mysql::server
+require mysql::config
+require mysql::server
