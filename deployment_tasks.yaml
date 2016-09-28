@@ -46,6 +46,16 @@
     puppet_modules: puppet/modules:/etc/puppet/modules
     timeout: 1800
 
+- id: tesora-dbaas-haproxy-mistral
+  type: puppet
+  groups: [primary-controller, controller]
+  requires: [deploy_start, cluster-haproxy, openstack-haproxy]
+  required_for: [deploy_end]
+  parameters:
+    puppet_manifest: puppet/manifests/haproxy_mistral.pp
+    puppet_modules: puppet/modules:/etc/puppet/modules
+    timeout: 1800
+
 - id: tesora-dbaas-db
   type: puppet
   groups: [primary-controller, controller]
@@ -53,6 +63,16 @@
   required_for: [deploy_end]
   parameters:
     puppet_manifest: puppet/manifests/db.pp
+    puppet_modules: puppet/modules:/etc/puppet/modules
+    timeout: 1800
+
+- id: tesora-dbaas-db-mistral
+  type: puppet
+  groups: [primary-controller, controller]
+  requires: [primary-database, database]
+  required_for: [deploy_end]
+  parameters:
+    puppet_manifest: puppet/manifests/db_mistral.pp
     puppet_modules: puppet/modules:/etc/puppet/modules
     timeout: 1800
 
@@ -66,6 +86,16 @@
     puppet_modules: puppet/modules:/etc/puppet/modules
     timeout: 1800
 
+- id: tesora-dbaas-keystone-mistral
+  type: puppet
+  groups: [primary-controller, controller]
+  requires: [primary-keystone, keystone]
+  required_for: [deploy_end]
+  parameters:
+    puppet_manifest: puppet/manifests/keystone_mistral.pp
+    puppet_modules: puppet/modules:/etc/puppet/modules
+    timeout: 1800
+
 - id: tesora-dbaas-install-packages
   type: puppet
   groups: [tesora-dbaas]
@@ -73,6 +103,16 @@
   required_for: [deploy_end]
   parameters:
     puppet_manifest: puppet/manifests/install.pp
+    puppet_modules: puppet/modules:/etc/puppet/modules
+    timeout: 1800
+
+- id: tesora-dbaas-install-packages-mistral
+  type: puppet
+  groups: [tesora-dbaas]
+  requires: [deploy_start, tesora-dbaas-configure-repo, heat, horizon]
+  required_for: [deploy_end]
+  parameters:
+    puppet_manifest: puppet/manifests/install_mistral.pp
     puppet_modules: puppet/modules:/etc/puppet/modules
     timeout: 1800
 
@@ -107,6 +147,19 @@
     puppet_modules: puppet/modules:/etc/puppet/modules
     timeout: 1800
 
+- id: tesora-dbaas-configure-mistral
+  type: puppet
+  groups: [tesora-dbaas]
+  requires: [rabbitmq, tesora-dbaas-rabbitmq, tesora-dbaas-install-packages-mistral]
+  required_for: [deploy_end]
+  cross-depends:
+    - name: tesora-dbaas-keystone-mistral
+    - name: tesora-dbaas-db-mistral
+  parameters:
+    puppet_manifest: puppet/manifests/configure_mistral.pp
+    puppet_modules: puppet/modules:/etc/puppet/modules
+    timeout: 1800
+
 - id: tesora-dbaas-db-sync
   type: puppet
   groups: [tesora-dbaas]
@@ -116,6 +169,18 @@
     - name: tesora-dbaas-db
   parameters:
     puppet_manifest: puppet/manifests/db_sync.pp
+    puppet_modules: puppet/modules:/etc/puppet/modules
+    timeout: 1800
+
+- id: tesora-dbaas-db-sync-mistral
+  type: puppet
+  groups: [tesora-dbaas]
+  requires: [tesora-dbaas-configure-mistral]
+  required_for: [deploy_end]
+  cross-depends:
+    - name: tesora-dbaas-db-mistral
+  parameters:
+    puppet_manifest: puppet/manifests/db_sync_mistral.pp
     puppet_modules: puppet/modules:/etc/puppet/modules
     timeout: 1800
 
