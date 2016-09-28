@@ -50,3 +50,19 @@ attributes:
     value:
       generator: 'password'
     weight: 103
+
+  mistral_mysql_password:
+    label: ""
+    description: ""
+    type: 'hidden'
+    value:
+      generator: 'password'
+    weight: 104
+
+  mistral_admin_password:
+    label: ""
+    description: ""
+    type: 'hidden'
+    value:
+      generator: 'password'
+    weight: 105
