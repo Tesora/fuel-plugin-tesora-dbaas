@@ -5,6 +5,8 @@
 # except as may be expressly permitted in the applicable license agreement.
 #
 
+notice('tesora_mistral dashboard_mistral.pp')
+
 class tesora_mistral::dashboard_mistral {
 
   include ::horizon::params
@@ -30,5 +32,6 @@ class tesora_mistral::dashboard_mistral {
   service { $horizon::params::http_service:
     ensure => running,
   }
-
 }
+
+class { 'tesora_mistral::dashboard_mistral': }

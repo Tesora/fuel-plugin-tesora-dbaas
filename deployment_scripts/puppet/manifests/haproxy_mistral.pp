@@ -5,3 +5,4 @@
 # except as may be expressly permitted in the applicable license agreement.
 #
 
+notice('tesora_mistral haproxy_mistral.pp')
