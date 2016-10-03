@@ -5,7 +5,7 @@
 # except as may be expressly permitted in the applicable license agreement.
 #
 
-class tesora_mistral::engine {
+class tesora_mistral::engine_mistral {
 
   class { '::mistral::engine': }
 

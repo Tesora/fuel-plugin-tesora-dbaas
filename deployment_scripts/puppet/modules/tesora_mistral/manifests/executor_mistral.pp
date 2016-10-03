@@ -5,7 +5,7 @@
 # except as may be expressly permitted in the applicable license agreement.
 #
 
-class tesora_mistral::executor {
+class tesora_mistral::executor_mistral {
 
   class { '::mistral::executor': }
   Mistral_config <||> ~> Service[$::mistral::params::executor_service_name]
