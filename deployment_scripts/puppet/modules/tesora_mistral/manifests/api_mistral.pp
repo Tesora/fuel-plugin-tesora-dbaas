@@ -5,7 +5,7 @@
 # except as may be expressly permitted in the applicable license agreement.
 #
 
-class tesora_mistral::api {
+class tesora_mistral::api_mistral {
 
   class { '::mistral::api':
     bind_host => $tesora_mistral::bind_host,

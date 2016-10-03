@@ -5,8 +5,8 @@
 # except as may be expressly permitted in the applicable license agreement.
 #
 
-notice('MODULAR: tesora_mistral/db_sync_mistral.pp')
+notice('tesora_mistral db_sync_mistral.pp')
 
-#include tesora_mistral
+include tesora_mistral
 
-#class {'tesora_mistral::db_sync':}
+class {'tesora_mistral::db_sync_mistral':}

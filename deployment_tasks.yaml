@@ -46,15 +46,16 @@
     puppet_modules: puppet/modules:/etc/puppet/modules
     timeout: 1800
 
-- id: tesora-dbaas-haproxy-mistral
-  type: puppet
-  groups: [primary-controller, controller]
-  requires: [deploy_start, cluster-haproxy, openstack-haproxy]
-  required_for: [deploy_end]
-  parameters:
-    puppet_manifest: puppet/manifests/haproxy_mistral.pp
-    puppet_modules: puppet/modules:/etc/puppet/modules
-    timeout: 1800
+# Missing in US but however US has task VIP. Not sure if same
+#- id: tesora-dbaas-haproxy-mistral
+#  type: puppet
+#  groups: [primary-controller, controller]
+#  requires: [deploy_start, cluster-haproxy, openstack-haproxy]
+#  required_for: [deploy_end]
+#  parameters:
+#    puppet_manifest: puppet/manifests/haproxy_mistral.pp
+#    puppet_modules: puppet/modules:/etc/puppet/modules
+#    timeout: 1800
 
 - id: tesora-dbaas-db
   type: puppet
@@ -193,3 +194,45 @@
     puppet_manifest: puppet/manifests/install_horizon.pp
     puppet_modules: puppet/modules:/etc/puppet/modules
     timeout: 1800
+
+- id: mistral-dashboard
+  type: puppet
+  groups: [primary-controller, controller]
+  required_for: [deploy_end]
+  cross-depends:
+    - name: tesora-dbaas-horizon
+  parameters:
+    puppet_manifest: puppet/manifests/dashboard_mistral.pp
+    puppet_modules: puppet/modules:/etc/puppet/modules
+    timeout: 1800
+
+- id: mistral-api
+  type: puppet
+  groups: [primary-controller, controller]
+  requires: [tesora-dbaas-configure-mistral, tesora-dbaas-keystone-mistral, tesora-dbaas-db-mistral, tesora-dbaas-db-sync-mistral]
+  required_for: [deploy_end]
+  parameters:
+    puppet_manifest: puppet/manifests/api_mistral.pp
+    puppet_modules: puppet/modules:/etc/puppet/modules
+    timeout: 1800
+
+- id: mistral-engine
+  type: puppet
+  groups: [tesora-dbaas]
+  requires: [tesora-dbaas-configure-mistral, tesora-dbaas-db-sync-mistral]
+  required_for: [deploy_end]
+  parameters:
+    puppet_manifest: puppet/manifests/engine_mistral.pp
+    puppet_modules: puppet/modules:/etc/puppet/modules
+    timeout: 1800
+
+- id: mistral-executor
+  type: puppet
+  groups: [tesora-dbaas]
+  requires: [tesora-dbaas-configure-mistral, tesora-dbaas-db-sync-mistral]
+  required_for: [deploy_end]
+  parameters:
+    puppet_manifest: puppet/manifests/executor_mistral.pp
+    puppet_modules: puppet/modules:/etc/puppet/modules
+    timeout: 1800
+

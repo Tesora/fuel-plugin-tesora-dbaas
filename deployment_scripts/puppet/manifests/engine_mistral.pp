@@ -5,8 +5,8 @@
 # except as may be expressly permitted in the applicable license agreement.
 #
 
-notice('MODULAR: tesora_mistral/engine_mistral.pp')
+notice('tesora_mistral engine_mistral.pp')
 
 include tesora_mistral
 
-class {'tesora_mistral::engine':}
+class {'tesora_mistral::engine_mistral':}
