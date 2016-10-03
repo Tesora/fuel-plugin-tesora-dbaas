@@ -5,8 +5,15 @@
 # except as may be expressly permitted in the applicable license agreement.
 #
 
-notice('MODULAR: tesora_mistral/engine_mistral.pp')
+notice('tesora_mistral engine_mistral.pp')
 
-include tesora_mistral
+class tesora_mistral::engine_mistral {
 
-class {'tesora_mistral::engine':}
+  class { '::mistral::engine': }
+
+  Mistral_config <||> ~> Service[$::mistral::params::engine_service_name]
+  Package['mistral-engine'] -> Service[$::mistral::params::engine_service_name]
+  Package['mistral-engine'] -> Service['mistral-engine']
+}
+
+class {'tesora_mistral::engine_mistral':}

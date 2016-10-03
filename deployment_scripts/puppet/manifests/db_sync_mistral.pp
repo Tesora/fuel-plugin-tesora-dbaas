@@ -5,8 +5,19 @@
 # except as may be expressly permitted in the applicable license agreement.
 #
 
-notice('MODULAR: tesora_mistral/db_sync_mistral.pp')
+notice('tesora_mistral db_sync_mistral.pp')
 
-#include tesora_mistral
+class tesora_mistral::db_sync {
 
-#class {'tesora_mistral::db_sync':}
+  Exec <| title == 'mistral-db-sync' |> {
+    refreshonly => false,
+  }
+
+  Exec <| title == 'mistral-db-populate' |> {
+    refreshonly => false,
+  }
+
+  include mistral::db::sync
+}
+
+class {'tesora_mistral::db_sync_mistral':}

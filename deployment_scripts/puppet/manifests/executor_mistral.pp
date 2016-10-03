@@ -5,8 +5,14 @@
 # except as may be expressly permitted in the applicable license agreement.
 #
 
-notice('MODULAR: tesora_mistral/executor_mistral.pp')
+notice('tesora_mistral executor_mistral.pp')
 
-include tesora_mistral
+class tesora_mistral::executor_mistral {
 
-class {'tesora_mistral::executor':}
+  class { '::mistral::executor': }
+  Mistral_config <||> ~> Service[$::mistral::params::executor_service_name]
+  Package['mistral-executor'] -> Service[$::mistral::params::executor_service_name]
+  Package['mistral-executor'] -> Service['mistral-executor']
+}
+
+class {'tesora_mistral::executor_mistral':}

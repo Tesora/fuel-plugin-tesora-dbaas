@@ -5,6 +5,8 @@
 # except as may be expressly permitted in the applicable license agreement.
 #
 
+notice('tesora_dbaas configure.pp')
+
 $ip_management    = hiera('management_vip')
 $ip_public        = hiera('public_vip')
 $ssl_hash         = hiera_hash('use_ssl', {})
