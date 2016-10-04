@@ -5,7 +5,7 @@
 # except as may be expressly permitted in the applicable license agreement.
 #
 
-notice('tesora_dbaas db.pp')
+notice('tesora_mistral db_mistral.pp')
 
 $node_name           = hiera('node_name')
 

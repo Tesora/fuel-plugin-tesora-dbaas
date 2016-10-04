@@ -5,8 +5,4 @@
 # except as may be expressly permitted in the applicable license agreement.
 #
 
-notice('MODULAR: tesora_mistral/api_mistral.pp')
-
-include tesora_mistral
-
-class {'tesora_mistral::api':}
+notice('tesora_mistral api_mistral.pp')
