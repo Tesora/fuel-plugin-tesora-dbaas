@@ -5,6 +5,8 @@
 # except as may be expressly permitted in the applicable license agreement.
 #
 
+notice('tesora_dbaas haproxy.pp')
+
 $network_metadata = hiera_hash('network_metadata', {})
 $ip_management    = hiera('management_vip')
 $ip_public        = hiera('public_vip')

@@ -5,7 +5,7 @@
 # except as may be expressly permitted in the applicable license agreement.
 #
 
-notice('tesora_dbaas keystone.pp')
+notice('tesora_mistral keystone_mistral.pp')
 
 $tesora_dbaas_hash  = hiera_hash('fuel-plugin-tesora-dbaas')
 $public_ssl_hash    = hiera('public_ssl')
