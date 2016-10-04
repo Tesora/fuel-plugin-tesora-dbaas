@@ -6,34 +6,44 @@
 #
 
 class tesora_mistral::configure_mistral {
-
-  $roles = hiera(roles)
-
-  Package <| title == 'mistral-common' |> {
-    name => 'mistral-common',
-  }
-  class { '::mistral':
-    keystone_password                  => $tesora_mistral::password,
-    keystone_user                      => $tesora_mistral::auth_name,
-    keystone_tenant                    => $tesora_mistral::tenant,
-    auth_uri                           => $tesora_mistral::auth_uri,
-    identity_uri                       => $tesora_mistral::identity_uri,
-    database_connection                => $tesora_mistral::db_connection,
-    rpc_backend                        => $tesora_mistral::rpc_backend,
-    rabbit_hosts                       => $tesora_mistral::rabbit_hosts,
-    rabbit_userid                      => $tesora_mistral::rabbit_hash['user'],
-    rabbit_password                    => $tesora_mistral::rabbit_hash['password'],
-    control_exchange                   => $tesora_mistral::control_exchange,
-    rabbit_ha_queues                   => $tesora_mistral::rabbit_ha_queues,
-    use_syslog                         => $tesora_mistral::use_syslog,
-    use_stderr                         => $tesora_mistral::use_stderr,
-    log_facility                       => $tesora_mistral::log_facility,
-    verbose                            => $tesora_mistral::verbose,
-    debug                              => $tesora_mistral::debug,
+  # Replace the mistral-setup.sh that comes in the package.
+  file { '/opt/tesora/dbaas/bin/mistral-setup.sh':
+    ensure => absent,
   }
 
-  mistral_config {
-    'keystone_authtoken/auth_version': value => $tesora_mistral::auth_version;
+  file { '/opt/tesora/dbaas/bin/fuel_dbaas_mistral-setup.sh':
+    ensure => present,
+    source => 'puppet:///modules/tesora_mistral/mistral-setup.sh',
   }
 
+  file { '/tmp/mistral_setup.cfg':
+    ensure  => file,
+    content => template('tesora_mistral/mistral_setup.cfg.erb')
+  }
+
+  exec { 'install':
+    command   => "/opt/tesora/dbaas/bin/fuel_dbaas_mistral-setup.sh /tmp/mistral_setup.cfg ${::primary_controller}",
+    logoutput => true,
+    require   => [ File['/opt/tesora/dbaas/bin/fuel_dbaas_mistral-setup.sh'], File['/tmp/mistral_setup.cfg'] ],
+    onlyif    => '/usr/bin/test True',
+    notify    => [ Service['mistral-api'], Service['mistral-engine'], Service['mistral-executor'] ]
+  }
+
+  require 'mysql::bindings'
+  require 'mysql::bindings::python'
+
+  # TODO: we want to be restarting the services on conf file changes
+  Service { ensure => running, enable => true, require => Exec['install'] }
+
+  service { 'mistral-api': }
+  service { 'mistral-engine': }
+  service { 'mistral-executor': }
+
+  $firewall_rule = '239 tesora_mistral'
+
+  firewall { $firewall_rule :
+    dport  => 8989,
+    proto  => 'tcp',
+    action => 'accept',
+  }
 }
