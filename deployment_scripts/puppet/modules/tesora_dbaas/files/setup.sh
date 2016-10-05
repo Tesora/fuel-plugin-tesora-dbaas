@@ -1,6 +1,6 @@
 #!/bin/bash -x
 #
-# Copyright (c) 2014 Tesora Inc.  All Rights Reserved.
+# Copyright (c) 2016 Tesora Inc.  All Rights Reserved.
 #
 # All use, reproduction, transfer, publication or disclosure is prohibited
 # except as may be expressly permitted in the applicable license agreement.
@@ -188,3 +188,7 @@ ini_set /etc/trove/trove-taskmanager.conf DEFAULT nova_proxy_admin_tenant_id "${
 ini_set /etc/trove/trove.conf DEFAULT nova_proxy_admin_tenant_id "${nova_proxy_admin_tenant_id}"
 
 chown trove:trove /var/log/trove/trove-api.log
+
+if [ -f /var/log/trove/trove-api.log ]; then
+    chown trove:trove /var/log/trove/trove-api.log
+fi
