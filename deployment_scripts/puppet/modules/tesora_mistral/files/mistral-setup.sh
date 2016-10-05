@@ -79,7 +79,6 @@ db_pass=${opt_trove_mysql_pass}
 
 # Keystone
 keystone_admin_url=$OS_AUTH_URL
-keystone_unversioned_admin_url=$(echo $keystone_admin_url | sed 's/\(http[s]*:\/\/[0-9\.]*:[0-9]*\).*/\1/' )
 keystone_host=$( echo $keystone_admin_url | sed -e "s/.*:\/\/\(.*\):[\0-9]\+.*/\1/" )
 keystone_port=$( echo $keystone_admin_url | sed -e "s/.*:\/\/.*:\([\0-9]\+\).*/\1/" )
 keystone_user=${opt_keystone_admin_user}
@@ -93,15 +92,17 @@ else
     LOCAL_KEYSTONE_VERSION_STR="v3"
 fi
 
+keystone_unversioned_admin_url=$(echo $keystone_admin_url | sed 's/\(http[s]*:\/\/[0-9\.]*:[0-9]*\).*/\1/' )
+keystone_unversioned_public_url=$keystone_unversioned_admin_url
+keystone_public_url="$keystone_unversioned_admin_url/$LOCAL_KEYSTONE_VERSION_STR"
+
+
 # Assume for now that all services are running on the keystone host
 opt_guest_keystone_host=${keystone_host}
 opt_rabbit_host=${keystone_host}
 opt_rabbit_port=${keystone_port}
 opt_rabbit_user=${keystone_user}
 opt_rabbit_pass=${keystone_pass}
-
-keystone_public_url="$keystone_unversioned_public_url/$LOCAL_KEYSTONE_VERSION_STR"
-keystone_unversioned_public_url=$(echo $keystone_public_url | sed 's/\(http[s]*:\/\/[0-9\.]*:[0-9]*\).*/\1/' )
 
 # Mistral & Rabbitmq
 mistral_admin_user=${opt_mistral_admin_user}
@@ -119,7 +120,7 @@ mistral_endpoint="${mistral_url}/v2"
 database="mistral"
 file=/etc/${database}/${database}.conf
 
-ini_set "$file" DEFAULT debug True
+ini_set "$file" DEFAULT debug False
 ini_set "$file" DEFAULT log_dir /var/log/mistral
 ini_set "$file" DEFAULT log_file mistral.log
 
