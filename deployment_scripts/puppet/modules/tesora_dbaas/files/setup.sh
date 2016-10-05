@@ -1,6 +1,6 @@
 #!/bin/bash -x
 #
-# Copyright (c) 2014 Tesora Inc.  All Rights Reserved.
+# Copyright (c) 2016 Tesora Inc.  All Rights Reserved.
 #
 # All use, reproduction, transfer, publication or disclosure is prohibited
 # except as may be expressly permitted in the applicable license agreement.
@@ -99,16 +99,6 @@ keystone_admin_user=${opt_keystone_admin_user}
 keystone_admin_password=${opt_keystone_admin_pass}
 keystone_admin_tenant=${opt_keystone_admin_tenant}
 
-nova_url=${opt_nova_url}
-nova_user=${opt_nova_user}
-nova_password=${opt_nova_pass}
-nova_tenant=${opt_nova_tenant}
-
-cinder_url=${opt_cinder_url}
-
-swift_admin_url="${opt_swift_admin_url}/AUTH_"
-swift_public_url="${opt_swift_public_url}/AUTH_"
-
 rabbit_hosts=${opt_rabbit_hosts}
 rabbit_userid=${opt_rabbit_user}
 rabbit_password=${opt_rabbit_pass}
@@ -135,11 +125,7 @@ for file in /etc/trove/trove.conf /etc/trove/trove-taskmanager.conf /etc/trove/t
     ini_set "$file" oslo_messaging_rabbit rabbit_password $rabbit_password
 
     # set OpenStack credentials
-    ini_set "$file" DEFAULT nova_proxy_admin_user $nova_user
-    ini_set "$file" DEFAULT nova_proxy_admin_pass $nova_password
     ini_set "$file" DEFAULT trove_auth_url $keystone_admin_url
-
-    ini_set "$file" DEFAULT swift_url $swift_admin_url
 
     [ -n "${trove_region}" ] && ini_set "$file" DEFAULT os_region_name $trove_region
 
@@ -147,20 +133,14 @@ for file in /etc/trove/trove.conf /etc/trove/trove-taskmanager.conf /etc/trove/t
     if [[ ! $file =~ "trove-guestagent" ]]
     then
         ini_set "$file" database connection $sql_connection
-        ini_set "$file" DEFAULT nova_compute_url $nova_url
-        ini_set "$file" DEFAULT cinder_url $cinder_url
 
-        [ -n "${opt_use_nova_key_name}" ] && ini_set "$file" DEFAULT use_nova_key_name $opt_use_nova_key_name
-        [ -n "${opt_use_nova_server_config_drive}" ] && ini_set "$file" DEFAULT use_nova_server_config_drive $opt_use_nova_server_config_drive
         [ -n "${opt_network_driver}" ] && ini_set "$file" DEFAULT network_driver $opt_network_driver
-        [ -n "${opt_cinder_service_type}" ] && ini_set "$file" DEFAULT cinder_service_type $opt_cinder_service_type
         [ -n "${opt_network_label_regex}" ] && ini_set "$file" DEFAULT network_label_regex $opt_network_label_regex
     fi
 done
 
 file=/etc/trove/trove-guestagent.conf
 ini_set "$file" DEFAULT trove_auth_url "$keystone_public_url"
-ini_set "$file" DEFAULT swift_url "$swift_public_url"
 ini_set "$file" oslo_messaging_rabbit rabbit_hosts "$guest_rabbit_hosts"
 
 file=/etc/trove/trove.conf
@@ -182,9 +162,8 @@ function keystone_cmd {
 }
 export -f keystone_cmd
 
-# Get the id for the admin tenant from keystone and add to trove-taskmanager.conf
-nova_proxy_admin_tenant_id=$( keystone_cmd tenant-get $nova_tenant | awk '/\ id\ / {print $4}' )
-ini_set /etc/trove/trove-taskmanager.conf DEFAULT nova_proxy_admin_tenant_id "${nova_proxy_admin_tenant_id}"
-ini_set /etc/trove/trove.conf DEFAULT nova_proxy_admin_tenant_id "${nova_proxy_admin_tenant_id}"
-
 chown trove:trove /var/log/trove/trove-api.log
+
+if [ -f /var/log/trove/trove-api.log ]; then
+    chown trove:trove /var/log/trove/trove-api.log
+fi
