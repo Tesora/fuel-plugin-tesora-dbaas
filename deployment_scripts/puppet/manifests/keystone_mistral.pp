@@ -11,7 +11,7 @@ $tesora_dbaas_hash  = hiera_hash('fuel-plugin-tesora-dbaas')
 $public_ssl_hash    = hiera('public_ssl')
 $public_vip         = hiera('public_vip')
 $admin_address      = hiera('management_vip')
-$api_bind_port      = 'TODO8779'
+$mistral_api_port   = '8989'
 $mistral_admin_user   = pick($tesora_dbaas_hash['mistral_admin_user'], 'mistral')
 $mistral_admin_pass   = $tesora_dbaas_hash['mistral_admin_password']
 $mistral_admin_tenant = 'services'
@@ -26,8 +26,8 @@ $public_protocol = $public_ssl_hash['services'] ? {
   true    => 'https',
   default => 'http',
 }
-$public_url         = "${public_protocol}://${public_address}:${api_bind_port}/v1.0/%(tenant_id)s"
-$admin_url          = "http://${admin_address}:${api_bind_port}/v1.0/%(tenant_id)s"
+$public_url         = "${public_protocol}://${public_address}:${mistral_api_port}/v1.0/%(tenant_id)s"
+$admin_url          = "http://${admin_address}:${mistral_api_port}/v1.0/%(tenant_id)s"
 
 Class['::osnailyfacter::wait_for_keystone_backends'] -> Keystone_service['mistral']
 
