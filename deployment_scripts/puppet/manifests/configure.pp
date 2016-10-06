@@ -13,44 +13,10 @@ $ssl_hash         = hiera_hash('use_ssl', {})
 $network_metadata = hiera_hash('network_metadata', {})
 $public_ssl_hash   = hiera_hash('public_ssl', {})
 
-# ---------- CINDER -----------------------------------------------
-$cinder_endpoint  = hiera('cinder_endpoint', $ip_management)
-$cinder_hash      = hiera_hash('cinder', { })
-$cinder_internal_port = 8776
-
-$cinder_internal_protocol = get_ssl_property($ssl_hash, {}, 'cinder', 'internal', 'protocol', 'http')
-$cinder_internal_endpoint = get_ssl_property($ssl_hash, {}, 'cinder', 'internal', 'hostname', [$cinder_endpoint])
-$cinder_internal_url = "${cinder_internal_protocol}://${cinder_internal_endpoint}:${cinder_internal_port}/v2"
-
-# ---------- SWIFT -----------------------------------------------
-$swift_endpoint = hiera('swift_endpoint', $ip_management)
-$swift_hash     = hiera_hash('swift', { })
-
-$swift_internal_port = 8080
-$swift_public_port = 8080
-$swift_api_version = 'v1'
-
-$swift_internal_protocol = get_ssl_property($ssl_hash, {}, 'swift', 'internal', 'protocol', 'http')
-$swift_internal_endpoint = get_ssl_property($ssl_hash, {}, 'swift', 'internal', 'hostname', [$swift_endpoint])
-$swift_internal_url = "${swift_internal_protocol}://${swift_internal_endpoint}:${swift_internal_port}/${swift_api_version}"
-
-$swift_public_protocol = get_ssl_property($ssl_hash, $public_ssl_hash, 'swift', 'public', 'protocol', 'http')
-$swift_public_address  = get_ssl_property($ssl_hash, $public_ssl_hash, 'swift', 'public', 'hostname', [$ip_public])
-$swift_public_url      = "${swift_public_protocol}://${swift_public_address}:${swift_public_port}/${swift_api_version}"
 # ---------- NOVA -----------------------------------------------
 $nova_endpoint    = hiera('nova_endpoint', $ip_management)
 $nova_hash        = hiera_hash('nova', { })
-
-$nova_internal_port = 8774
-
-$nova_internal_protocol = get_ssl_property($ssl_hash, {}, 'nova', 'internal', 'protocol', 'http')
-$nova_internal_endpoint = get_ssl_property($ssl_hash, {}, 'nova', 'internal', 'hostname', [$nova_endpoint])
-
-$nova_internal_url = "${nova_internal_protocol}://${nova_internal_endpoint}:${nova_internal_port}/v2"
-$nova_admin_user   = pick($nova_hash['user'], 'nova')
-$nova_admin_pass   = $nova_hash['user_password']
 $nova_admin_tenant = pick($nova_hash['tenant'], 'services')
-$nova_public_ip    = $ip_public
 
 # ---------- KEYSTONE -----------------------------------------------
 $access_hash   = hiera_hash('access',{})
@@ -130,16 +96,6 @@ class { 'tesora_dbaas':
   trove_admin_user      => $trove_admin_user,
   trove_admin_pass      => $trove_admin_pass,
   trove_admin_tenant    => $trove_admin_tenant,
-
-  cinder_url            => $cinder_internal_url,
-
-  swift_admin_url       => $swift_internal_url,
-  swift_public_url      => $swift_public_url,
-
-  nova_url              => $nova_internal_url,
-  nova_user             => $nova_admin_user,
-  nova_pass             => $nova_admin_pass,
-  nova_tenant           => $nova_admin_tenant,
 
   rabbit_hosts          => $trove_rabbit_hosts,
   rabbit_user           => $trove_rabbit_user,
