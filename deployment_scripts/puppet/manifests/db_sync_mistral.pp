@@ -12,7 +12,7 @@ $mysql_hash     = hiera_hash('mysql', {})
 $mysql_host_port  = "${ip_database}:3306"
 
 $tesora_hash         = hiera_hash('fuel-plugin-tesora-dbaas')
-$mistral_mysql_user  = pick($tesora_hash['mysql_user_mistral'], 'mistral')
+$mistral_mysql_user  = pick($tesora_hash['mistral_mysql_user'], 'mistral')
 $mistral_mysql_pass  = $tesora_hash['mistral_mysql_password']
 $mistral_mysql_databasename = 'mistral'
 
