@@ -74,7 +74,7 @@ else
     service openstack-trove-conductor stop
 fi
 
-db_hostport=${opt_mysqL_hostport}
+db_hostport=${opt_mysql_hostport}
 
 db_host=$( echo $db_hostport | awk -F':' '{print $1}' )
 db_port=$( echo $db_hostport | awk -F':' '{if ($2) print $2; else print 3306}' )
