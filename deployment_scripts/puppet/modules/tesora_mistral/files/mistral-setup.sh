@@ -69,7 +69,7 @@ service mistral-executor stop
 database="mistral"
 file=/etc/${database}/${database}.conf
 
-db_hostport=${opt_mysqL_hostport}
+db_hostport=${opt_mysql_hostport}
 
 # Database
 db_host=$( echo $db_hostport | awk -F':' '{print $1}' )
