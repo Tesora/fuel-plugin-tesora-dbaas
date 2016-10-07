@@ -12,7 +12,7 @@ class tesora_mistral::db_sync_mistral (
     $mistral_mysql_databasename = undef
 ) {
 
-  $mistral_mysql_connectionstring = "mysql://${mistral_mysql_user}:${mistral_mysql_pass}@${mistral_mysql_host_port}/${mistral_mysql_databasename}?charset=utf8"
+  $mistral_mysql_connectionstring = "mysql+pymysql://${mistral_mysql_user}:${mistral_mysql_pass}@${mistral_mysql_host_port}/${mistral_mysql_databasename}?charset=utf8"
 
   require 'mysql::bindings'
   require 'mysql::bindings::python'
