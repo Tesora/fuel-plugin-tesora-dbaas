@@ -15,7 +15,7 @@ $public_ssl_hash   = hiera_hash('public_ssl', {})
 
 
 # ---------- NOVA -----------------------------------------------
-$nova_hash        = hiera_hash('nova', { })
+$nova_hash         = hiera_hash('nova', { })
 $nova_admin_tenant = pick($nova_hash['tenant'], 'services')
 
 # ---------- KEYSTONE -----------------------------------------------
@@ -54,8 +54,8 @@ $mistral_public_url = "http://${ip_public}:8989"
 $mistral_admin_url  = "http://${ip_management}:8989"
 
 # ---------- PLUGIN UI/metadata ----------------------------------
-$mistral_mysql_user    = pick($tesora_hash['mysql_user'], 'mistral')
-$mistral_mysql_pass    = $tesora_hash['mysql_password']
+$mistral_mysql_user    = pick($tesora_hash['mysql_user_mistral'], 'mistral')
+$mistral_mysql_pass    = $tesora_hash['mistral_mysql_password']
 $mistral_admin_user    = pick($tesora_hash['admin_user'], 'mistral')
 $mistral_admin_pass    = $tesora_hash['admin_password']
 $mistral_rabbit_user   = pick($tesora_hash['rabbit_user'], 'mistral')
@@ -66,9 +66,7 @@ $guest_download_pass = $tesora_hash['tesora_guest_download_password']
 $network_scheme      = hiera_hash('network_scheme', {})
 prepare_network_config($network_scheme)
 $mistral_bind_host     = get_network_role_property('mistral/api', 'ipaddr')
-
 $mistral_admin_tenant = pick($tesora_hash['tenant'], $nova_admin_tenant)
-
 $mistral_region     = hiera('region', 'RegionOne')
 
 $primary_controller = hiera('primary_controller')
