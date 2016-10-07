@@ -74,8 +74,8 @@ db_hostport=${opt_mysql_hostport}
 # Database
 db_host=$( echo $db_hostport | awk -F':' '{print $1}' )
 db_port=$( echo $db_hostport | awk -F':' '{if ($2) print $2; else print 3306}' )
-db_user=${opt_trove_mysql_user}
-db_pass=${opt_trove_mysql_pass}
+db_user=${opt_mistral_mysql_user}
+db_pass=${opt_mistral_mysql_pass}
 
 # Keystone
 keystone_admin_url=$OS_AUTH_URL
