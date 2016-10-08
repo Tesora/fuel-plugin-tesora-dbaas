@@ -6,3 +6,7 @@
 #
 
 notice('tesora_mistral api_mistral.pp')
+
+include tesora_mistral
+
+class {'tesora_mistral::api':}
