@@ -193,3 +193,33 @@
     puppet_manifest: puppet/manifests/install_horizon.pp
     puppet_modules: puppet/modules:/etc/puppet/modules
     timeout: 1800
+
+- id: mistral-api
+  type: puppet
+  groups: [primary-controller, controller]
+  requires: [tesora-dbaas-configure-mistral, tesora-dbaas-keystone-mistral, tesora-dbaas-db-mistral, tesora-dbaas-db-sync-mistral]
+  required_for: [deploy_end]
+  parameters:
+    puppet_manifest: puppet/manifests/api_mistral.pp
+    puppet_modules: puppet/modules:/etc/puppet/modules
+    timeout: 1800
+
+- id: mistral-engine
+  type: puppet
+  groups: [tesora-dbaas]
+  requires: [tesora-dbaas-configure-mistral, tesora-dbaas-db-sync-mistral]
+  required_for: [deploy_end]
+  parameters:
+    puppet_manifest: puppet/manifests/engine_mistral.pp
+    puppet_modules: puppet/modules:/etc/puppet/modules
+    timeout: 1800
+
+- id: mistral-executor
+  type: puppet
+  groups: [tesora-dbaas]
+  requires: [tesora-dbaas-configure-mistral, tesora-dbaas-db-sync-mistral]
+  required_for: [deploy_end]
+  parameters:
+    puppet_manifest: puppet/manifests/executor_mistral.pp
+    puppet_modules: puppet/modules:/etc/puppet/modules
+    timeout: 1800
