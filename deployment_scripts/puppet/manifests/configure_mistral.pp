@@ -27,11 +27,11 @@ $keystone_admin_tenant = $access_hash['tenant']
 
 $keystone_public_protocol = get_ssl_property($ssl_hash, $public_ssl_hash, 'keystone', 'public', 'protocol', 'http')
 $keystone_public_address  = get_ssl_property($ssl_hash, $public_ssl_hash, 'keystone', 'public', 'hostname', [$ip_public])
-$keystone_public_url      = "${keystone_public_protocol}://${keystone_public_address}:5000/v2.0"
+$keystone_public_url      = "${keystone_public_protocol}://${keystone_public_address}:5000/v3"
 
 $keystone_internal_protocol = get_ssl_property($ssl_hash, {}, 'keystone', 'internal', 'protocol', 'http')
 $keystone_internal_address  = get_ssl_property($ssl_hash, {}, 'keystone', 'internal', 'hostname', [$ip_management])
-$keystone_internal_url      = "${keystone_internal_protocol}://${keystone_internal_address}:5000/v2.0"
+$keystone_internal_url      = "${keystone_internal_protocol}://${keystone_internal_address}:5000/v3"
 
 $keystone_admin_protocol = get_ssl_property($ssl_hash, {}, 'keystone', 'admin', 'protocol', 'http')
 $keystone_admin_address  = get_ssl_property($ssl_hash, {}, 'keystone', 'admin', 'hostname', [$ip_management])
@@ -49,7 +49,7 @@ $mysql_hash     = hiera_hash('mysql', {})
 
 $mysql_host_port  = "${ip_database}:3306"
 
-# ---------- TROVE -----------------------------------------------
+# ---------- MISTRAL -----------------------------------------------
 $mistral_public_url = "http://${ip_public}:8989"
 $mistral_admin_url  = "http://${ip_management}:8989"
 

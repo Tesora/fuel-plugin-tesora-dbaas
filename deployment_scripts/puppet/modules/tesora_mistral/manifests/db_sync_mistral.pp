@@ -44,3 +44,4 @@ class tesora_mistral::db_sync_mistral (
     Exec['tesora_mistral-dbsync-upgrade'] ->
       Exec['tesora_mistral-dbsync-populate']
 }
+
