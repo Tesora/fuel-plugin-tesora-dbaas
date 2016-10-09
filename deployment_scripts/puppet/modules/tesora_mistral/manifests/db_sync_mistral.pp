@@ -21,26 +21,4 @@ class tesora_mistral::db_sync_mistral (
     ensure  => file,
     content => template('tesora_mistral/mistral_dbsync.conf.erb')
   }
-
-  exec { 'tesora_mistral-dbsync-upgrade':
-    command     => 'mistral-db-manage --config-file=/etc/mistral/mistral_dbsync.conf upgrade 011',
-    path        => '/usr/bin',
-    user        => 'root',
-    refreshonly => true,
-    logoutput   => on_failure,
-    subscribe   => File['/etc/mistral/mistral_dbsync.conf'],
-  }
-
-  exec { 'tesora_mistral-dbsync-populate':
-    command     => 'mistral-db-manage --config-file=/etc/mistral/mistral_dbsync.conf populate',
-    path        => '/usr/bin',
-    user        => 'root',
-    refreshonly => true,
-    logoutput   => on_failure,
-    subscribe   => File['/etc/mistral/mistral_dbsync.conf'],
-  }
-
-  File['/etc/mistral/mistral_dbsync.conf'] ->
-    Exec['tesora_mistral-dbsync-upgrade'] ->
-      Exec['tesora_mistral-dbsync-populate']
 }

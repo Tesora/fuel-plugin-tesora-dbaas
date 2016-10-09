@@ -49,7 +49,7 @@ $mysql_hash     = hiera_hash('mysql', {})
 
 $mysql_host_port  = "${ip_database}:3306"
 
-# ---------- TROVE -----------------------------------------------
+# ---------- MISTRAL -----------------------------------------------
 $mistral_public_url = "http://${ip_public}:8989"
 $mistral_admin_url  = "http://${ip_management}:8989"
 
