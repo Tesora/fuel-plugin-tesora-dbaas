@@ -26,8 +26,8 @@ $public_protocol = $public_ssl_hash['services'] ? {
   true    => 'https',
   default => 'http',
 }
-$public_url         = "${public_protocol}://${public_address}:${mistral_api_port}/v1.0/%(tenant_id)s"
-$admin_url          = "http://${admin_address}:${mistral_api_port}/v1.0/%(tenant_id)s"
+$public_url         = "${public_protocol}://${public_address}:${mistral_api_port}/v2"
+$admin_url          = "http://${admin_address}:${mistral_api_port}/v2"
 
 Class['::osnailyfacter::wait_for_keystone_backends'] -> Keystone_service['mistral']
 
@@ -46,7 +46,7 @@ keystone_user_role { "${mistral_admin_user}@${mistral_admin_tenant}":
 
 keystone_service {'mistral':
   ensure      => present,
-  type        => 'workflow',
+  type        => 'workflowv2',
   description => 'Tesora DBaaS Platform',
 }
 
