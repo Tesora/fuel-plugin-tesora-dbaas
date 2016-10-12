@@ -32,19 +32,5 @@ class tesora_mistral (
 ) {
     notice ('tesora_mistral::init.pp')
 
-    Class['tesora_mistral::configure_mistral'] -> Class['tesora_mistral::config_client_mistral']
-
     class { 'tesora_mistral::configure_mistral': }
-
-    class { 'tesora_mistral::config_client_mistral':
-      os_auth_url         => $keystone_public_url,
-      os_user             => $keystone_admin_user,
-      os_pass             => $keystone_admin_pass,
-      os_tenant_name      => $keystone_admin_tenant,
-      guest_download_user => $guest_download_user,
-      guest_download_pass => $guest_download_pass,
-      dbaas_release       => 'enterprise',
-      dbaas_version       => '1.9',
-      dbaas_repo          => 'main',
-    }
 }
