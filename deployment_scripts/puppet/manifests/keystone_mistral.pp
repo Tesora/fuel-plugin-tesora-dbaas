@@ -46,7 +46,7 @@ keystone_user_role { "${mistral_admin_user}@${mistral_admin_tenant}":
 
 keystone_service {'mistral':
   ensure      => present,
-  type        => 'workflow',
+  type        => 'workflowv2',
   description => 'Tesora DBaaS Platform',
 }
 
