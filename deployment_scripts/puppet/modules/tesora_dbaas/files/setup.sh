@@ -78,7 +78,6 @@ db_admin_password=${opt_mysql_admin_pass}
 # Keystone
 keystone_admin_url=${opt_keystone_admin_url}
 keystone_public_url=${opt_keystone_public_url}
-keystone_admin_port=$( echo $keystone_admin_url | sed -e "s/.*:\/\/.*:\([\0-9]\+\).*/\1/" )
 keystone_admin_user=${opt_keystone_admin_user}
 keystone_admin_password=${opt_keystone_admin_pass}
 keystone_admin_tenant=${opt_keystone_admin_tenant}
@@ -101,13 +100,14 @@ trove_admin_url=${opt_trove_admin_url}
 for file in /etc/trove/trove.conf /etc/trove/trove-taskmanager.conf /etc/trove/trove-conductor.conf /etc/trove/trove-guestagent.conf; do
     # set OpenStack credentials
     ini_set "$file" DEFAULT rpc_backend rabbit
-    ini_set "$file" DEFAULT trove_auth_url $keystone_admin_url
+    ini_set "$file" DEFAULT trove_auth_url ${keystone_admin_url}
+    ini_set "$file" DEFAULT bind_host ${opt_trove_bind_host}
     [ -n "${trove_region}" ] && ini_set "$file" DEFAULT os_region_name $trove_region
 
     # set messaging credentials
-    ini_set "$file" oslo_messaging_rabbit rabbit_hosts "$rabbit_hosts"
-    ini_set "$file" oslo_messaging_rabbit rabbit_userid $rabbit_userid
-    ini_set "$file" oslo_messaging_rabbit rabbit_password $rabbit_password
+    ini_set "$file" oslo_messaging_rabbit rabbit_hosts ${rabbit_hosts}
+    ini_set "$file" oslo_messaging_rabbit rabbit_userid ${rabbit_userid}
+    ini_set "$file" oslo_messaging_rabbit rabbit_password ${rabbit_password}
 
     if [[ ! $file =~ "trove-guestagent" ]]
     then
@@ -121,16 +121,14 @@ ini_set "$file" DEFAULT trove_auth_url "$keystone_public_url"
 ini_set "$file" oslo_messaging_rabbit rabbit_hosts "$guest_rabbit_hosts"
 
 file=/etc/trove/trove.conf
-ini_set "$file" DEFAULT bind_host $opt_trove_bind_host
-ini_set "$file" keystone_authtoken auth_host $opt_controller_host
-ini_set "$file" keystone_authtoken auth_port $keystone_admin_port
-ini_set "$file" keystone_authtoken auth_protocol http
-ini_set "$file" keystone_authtoken admin_tenant_name $trove_tenant
-ini_set "$file" keystone_authtoken admin_user $trove_user
-ini_set "$file" keystone_authtoken admin_password $trove_password
-ini_set "$file" keystone_authtoken auth_version v2.0
-[ -n "${opt_auth_protocol}" ] && ini_set "$file" keystone_authtoken auth_protocol $opt_auth_protocol
-
+ini_set "$file" keystone_authtoken auth_url ${keystone_admin_url}
+ini_set "$file" keystone_authtoken auth_plugin v3password
+ini_set "$file" keystone_authtoken user_domain_name default
+ini_set "$file" keystone_authtoken project_domain_name default
+ini_set "$file" keystone_authtoken project_name ${trove_tenant}
+ini_set "$file" keystone_authtoken username ${trove_user}
+ini_set "$file" keystone_authtoken password ${trove_password}
+[ -n "${opt_auth_protocol}" ] && ini_set "$file" keystone_authtoken auth_protocol ${opt_auth_protocol}
 
 # Get information out of keystone and put in trove conf files.
 function keystone_cmd {
