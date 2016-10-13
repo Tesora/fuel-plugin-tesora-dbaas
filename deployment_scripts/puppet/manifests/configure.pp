@@ -25,17 +25,19 @@ $keystone_admin_user   = $access_hash['user']
 $keystone_admin_pass   = $access_hash['password']
 $keystone_admin_tenant = $access_hash['tenant']
 
+$keystone_url_version = "v3"
 $keystone_public_protocol = get_ssl_property($ssl_hash, $public_ssl_hash, 'keystone', 'public', 'protocol', 'http')
 $keystone_public_address  = get_ssl_property($ssl_hash, $public_ssl_hash, 'keystone', 'public', 'hostname', [$ip_public])
-$keystone_public_url      = "${keystone_public_protocol}://${keystone_public_address}:5000/v2.0"
+$keystone_public_url         = "${keystone_public_protocol}://${keystone_public_address}:5000/${keystone_url_version}"
+$keystone_public_unversioned = "${keystone_public_protocol}://${keystone_public_address}:5000"
 
 $keystone_internal_protocol = get_ssl_property($ssl_hash, {}, 'keystone', 'internal', 'protocol', 'http')
 $keystone_internal_address  = get_ssl_property($ssl_hash, {}, 'keystone', 'internal', 'hostname', [$ip_management])
-$keystone_internal_url      = "${keystone_internal_protocol}://${keystone_internal_address}:5000/v2.0"
+$keystone_internal_url      = "${keystone_internal_protocol}://${keystone_internal_address}:5000/${keystone_url_version}"
 
 $keystone_admin_protocol = get_ssl_property($ssl_hash, {}, 'keystone', 'admin', 'protocol', 'http')
 $keystone_admin_address  = get_ssl_property($ssl_hash, {}, 'keystone', 'admin', 'hostname', [$ip_management])
-$keystone_admin_url      = "${keystone_admin_protocol}://${keystone_admin_address}:35357/v2.0"
+$keystone_admin_url      = "${keystone_admin_protocol}://${keystone_admin_address}:35357/${keystone_url_version}"
 
 # ---------- RABBIT -----------------------------------------------
 $tesora_hash        = hiera_hash('fuel-plugin-tesora-dbaas')
