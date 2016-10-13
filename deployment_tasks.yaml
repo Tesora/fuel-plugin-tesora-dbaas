@@ -27,6 +27,7 @@
       type: parallel
 
 - id: tesora-dbaas-configure-repo
+  version: 2.0.0
   type: puppet
   groups: [primary-controller, controller, tesora-dbaas]
   requires: [deploy_start]
@@ -37,6 +38,7 @@
     timeout: 1800
 
 - id: tesora-dbaas-haproxy
+  version: 2.0.0
   type: puppet
   groups: [primary-controller, controller]
   requires: [deploy_start, cluster-haproxy, openstack-haproxy]
@@ -47,6 +49,7 @@
     timeout: 1800
 
 - id: tesora-dbaas-haproxy-mistral
+  version: 2.0.0
   type: puppet
   groups: [primary-controller, controller]
   requires: [deploy_start, cluster-haproxy, openstack-haproxy]
@@ -57,6 +60,7 @@
     timeout: 1800
 
 - id: tesora-dbaas-db
+  version: 2.0.0
   type: puppet
   groups: [primary-controller, controller]
   requires: [primary-database, database]
@@ -67,6 +71,7 @@
     timeout: 1800
 
 - id: tesora-dbaas-db-mistral
+  version: 2.0.0
   type: puppet
   groups: [primary-controller, controller]
   requires: [primary-database, database]
@@ -77,6 +82,7 @@
     timeout: 1800
 
 - id: tesora-dbaas-keystone
+  version: 2.0.0
   type: puppet
   groups: [primary-controller, controller]
   requires: [primary-keystone, keystone]
@@ -87,6 +93,7 @@
     timeout: 1800
 
 - id: tesora-dbaas-keystone-mistral
+  version: 2.0.0
   type: puppet
   groups: [primary-controller, controller]
   requires: [primary-keystone, keystone]
@@ -97,6 +104,7 @@
     timeout: 1800
 
 - id: tesora-dbaas-install-packages
+  version: 2.0.0
   type: puppet
   groups: [tesora-dbaas]
   requires: [deploy_start, tesora-dbaas-configure-repo, heat, horizon]
@@ -107,6 +115,7 @@
     timeout: 1800
 
 - id: tesora-dbaas-install-packages-mistral
+  version: 2.0.0
   type: puppet
   groups: [tesora-dbaas]
   requires: [deploy_start, tesora-dbaas-configure-repo, heat, horizon]
@@ -117,6 +126,7 @@
     timeout: 1800
 
 - id: tesora-dbaas-rabbitmq
+  version: 2.0.0
   type: puppet
   groups: [tesora-dbaas]
   requires: [tesora-dbaas-rabbitmq-cluster]
@@ -126,6 +136,7 @@
     timeout: 1800
 
 - id: tesora-dbaas-rabbitmq-cluster
+  version: 2.0.0
   type: puppet
   groups: [tesora-dbaas]
   requires: [hosts, firewall, deploy_start]
@@ -135,6 +146,7 @@
     timeout: 1800
 
 - id: tesora-dbaas-configure
+  version: 2.0.0
   type: puppet
   groups: [tesora-dbaas]
   requires: [rabbitmq, tesora-dbaas-rabbitmq, tesora-dbaas-install-packages]
@@ -148,6 +160,7 @@
     timeout: 1800
 
 - id: tesora-dbaas-configure-mistral
+  version: 2.0.0
   type: puppet
   groups: [tesora-dbaas]
   requires: [rabbitmq, tesora-dbaas-rabbitmq, tesora-dbaas-install-packages-mistral]
@@ -161,6 +174,7 @@
     timeout: 1800
 
 - id: tesora-dbaas-db-sync
+  version: 2.0.0
   type: puppet
   groups: [tesora-dbaas]
   requires: [tesora-dbaas-configure]
@@ -173,6 +187,7 @@
     timeout: 1800
 
 - id: tesora-dbaas-db-sync-mistral
+  version: 2.0.0
   type: puppet
   groups: [tesora-dbaas]
   requires: [tesora-dbaas-configure-mistral]
@@ -185,6 +200,7 @@
     timeout: 1800
 
 - id: tesora-dbaas-horizon
+  version: 2.0.0
   type: puppet
   groups: [primary-controller, controller]
   requires: [horizon]
