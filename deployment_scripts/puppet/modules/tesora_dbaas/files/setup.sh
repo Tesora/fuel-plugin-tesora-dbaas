@@ -122,11 +122,11 @@ ini_set "$file" oslo_messaging_rabbit rabbit_hosts ${guest_rabbit_hosts}
 
 file=/etc/trove/trove.conf
 ini_set "$file" keystone_authtoken auth_url ${keystone_admin_url}
-ini_set "$file" keystone_authtoken auth_plugin v3password
-ini_set "$file" keystone_authtoken user_domain_name default
-ini_set "$file" keystone_authtoken project_domain_name default
+ini_set "$file" keystone_authtoken auth_type v3password
+ini_set "$file" keystone_authtoken user_domain_name Default
+ini_set "$file" keystone_authtoken project_domain_name Default
 ini_set "$file" keystone_authtoken project_name ${trove_tenant}
-ini_set "$file" keystone_authtoken username ${trove_user}
+ini_set "$file" keystone_authtoken user-name ${trove_user}
 ini_set "$file" keystone_authtoken password ${trove_password}
 [ -n "${opt_auth_protocol}" ] && ini_set "$file" keystone_authtoken auth_protocol ${opt_auth_protocol}
 
