@@ -163,7 +163,7 @@
   version: 2.0.0
   type: puppet
   groups: [tesora-dbaas]
-  requires: [rabbitmq, tesora-dbaas-rabbitmq, tesora-dbaas-install-packages-mistral]
+  requires: [rabbitmq, tesora-dbaas-rabbitmq, tesora-dbaas-install-packages-mistral, tesora-dbaas-install-packages, tesora-dbaas-configure]
   required_for: [deploy_end]
   cross-depends:
     - name: tesora-dbaas-keystone-mistral
