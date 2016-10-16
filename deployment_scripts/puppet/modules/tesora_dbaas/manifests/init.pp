@@ -40,10 +40,18 @@ class tesora_dbaas (
     class { 'tesora_dbaas::configure': }
 
     class { 'tesora_dbaas::config_client':
-      os_auth_url         => $keystone_public_unversioned,
+      os_auth_url         => $keystone_admin_url,
       os_user             => $keystone_admin_user,
       os_pass             => $keystone_admin_pass,
       os_tenant_name      => $keystone_admin_tenant,
+      os_project_domain_id    => 'default',
+      os_image_api_version    => '2',
+      os_user_domain_id       => 'default',
+      os_project_name         => 'admin',
+      os_auth_version         => '3',
+      os_identity_api_version => '3',
+      os_compute_api_version  => '2',
+      os_volume_api_version   => '2',
       guest_download_user => $guest_download_user,
       guest_download_pass => $guest_download_pass,
       dbaas_release       => 'enterprise',
