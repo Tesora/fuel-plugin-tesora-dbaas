@@ -40,7 +40,7 @@ class tesora_dbaas (
     class { 'tesora_dbaas::configure': }
 
     class { 'tesora_dbaas::config_client':
-      os_auth_url         => $keystone_public_unversioned,
+      os_auth_url         => $keystone_admin_url,
       os_user             => $keystone_admin_user,
       os_pass             => $keystone_admin_pass,
       os_tenant_name      => $keystone_admin_tenant,

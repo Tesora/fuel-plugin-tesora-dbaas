@@ -7,6 +7,7 @@
 
 class tesora_dbaas::config_client (
     $os_auth_url = undef,
+    $os_mistral_url = undef,
     $os_user = undef,
     $os_pass = undef,
     $os_tenant_name = undef,

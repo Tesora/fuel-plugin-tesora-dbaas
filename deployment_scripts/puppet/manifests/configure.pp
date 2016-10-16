@@ -58,6 +58,11 @@ $mysql_admin_pass = $mysql_hash['root_password']
 $trove_public_url = "http://${ip_public}:8779"
 $trove_admin_url  = "http://${ip_management}:8779"
 
+# ---------- MISTRAL -----------------------------------------------
+$mistral_version = "v2"
+$mistral_public_url = "http://${ip_public}:8989/${mistral_version}"
+$mistral_admin_url  = "http://${ip_management}:8989/${mistral_version}"
+
 # ---------- PLUGIN UI/metadata ----------------------------------
 $trove_mysql_user    = pick($tesora_hash['mysql_user'], 'trove')
 $trove_mysql_pass    = $tesora_hash['mysql_password']
