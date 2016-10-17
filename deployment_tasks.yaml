@@ -168,6 +168,7 @@
   cross-depends:
     - name: tesora-dbaas-keystone-mistral
     - name: tesora-dbaas-db-mistral
+    - name: tesora-dbaas-haproxy-mistral
   parameters:
     puppet_manifest: puppet/manifests/configure_mistral.pp
     puppet_modules: puppet/modules:/etc/puppet/modules
