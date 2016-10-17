@@ -199,6 +199,19 @@
     puppet_modules: puppet/modules:/etc/puppet/modules
     timeout: 1800
 
+- id: tesora-dbaas-workbook-create
+  version: 2.0.0
+  type: puppet
+  groups: [tesora-dbaas]
+  requires: [tesora-dbaas-configure-mistral, tesora-dbaas-db-sync-mistral]
+  required_for: [deploy_end]
+  cross-depends:
+    - name: tesora-dbaas-haproxy-mistral
+  parameters:
+    puppet_manifest: puppet/manifests/workbook_create.pp
+    puppet_modules: puppet/modules:/etc/puppet/modules
+    timeout: 1800
+
 - id: tesora-dbaas-horizon
   version: 2.0.0
   type: puppet
