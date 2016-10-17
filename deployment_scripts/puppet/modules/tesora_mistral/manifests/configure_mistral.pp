@@ -50,6 +50,6 @@ class tesora_mistral::configure_mistral {
   exec { 'trove-workbook-create':
     command   => "/bin/bash -c 'source /opt/tesora/dbaas/bin/openrc.sh && /usr/bin/openstack workbook create  /etc/trove/trove-workbook.yaml ; true'",
     logoutput => true,
-    require   => [ Service['mistral-api'], Firewall[$firewall_rule] ],
+    require   => [ Service['mistral-api'], Service['mistral-engine'], Service['mistral-executor'], Firewall[$firewall_rule] ],
   }
 }
