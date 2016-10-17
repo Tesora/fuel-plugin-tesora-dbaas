@@ -30,6 +30,7 @@ openstack::ha::haproxy_service { 'mistral':
   public_ssl             => $public_ssl_hash['services'],
   public_ssl_path        => $public_ssl_path,
   public_virtual_ip      => $ip_public,
+  internal_virtual_ip    => '127.0.0.1',
   haproxy_config_options => {
       'http-request' => 'set-header X-Forwarded-Proto https if { ssl_fc }',
   },
