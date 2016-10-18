@@ -6,10 +6,6 @@
 #
 
 class tesora_mistral::configure_mistral {
-  # Replace the mistral-setup.sh that comes in the package.
-  file { '/opt/tesora/dbaas/bin/mistral-setup.sh':
-    ensure => absent,
-  }
 
   file { '/opt/tesora/dbaas/bin/fuel_dbaas_mistral-setup.sh':
     ensure => present,
