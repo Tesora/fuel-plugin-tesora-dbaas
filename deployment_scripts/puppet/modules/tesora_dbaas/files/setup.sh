@@ -82,6 +82,10 @@ keystone_admin_user=${opt_keystone_admin_user}
 keystone_admin_password=${opt_keystone_admin_pass}
 keystone_admin_tenant=${opt_keystone_admin_tenant}
 
+# This removes the version (v2.0, v3) from the url
+keystone_public_unversioned=$(echo $keystone_public_url | sed 's/\(http[s]*:\/\/[0-9\.]*:[0-9]*\).*/\1/' )
+keystone_admin_unversioned=$(echo $keystone_admin_url | sed 's/\(http[s]*:\/\/[0-9\.]*:[0-9]*\).*/\1/' )
+
 # Rabbit
 rabbit_hosts=${opt_rabbit_hosts}
 rabbit_userid=${opt_rabbit_user}
@@ -121,14 +125,11 @@ ini_set "$file" DEFAULT trove_auth_url ${keystone_public_url}
 ini_set "$file" oslo_messaging_rabbit rabbit_hosts ${guest_rabbit_hosts}
 
 file=/etc/trove/trove.conf
-ini_set "$file" keystone_authtoken auth_url ${keystone_admin_url}
-ini_set "$file" keystone_authtoken auth_plugin v3password
-ini_set "$file" keystone_authtoken user_domain_name default
-ini_set "$file" keystone_authtoken project_domain_name default
-ini_set "$file" keystone_authtoken project_name ${trove_tenant}
-ini_set "$file" keystone_authtoken username ${trove_user}
-ini_set "$file" keystone_authtoken password ${trove_password}
-[ -n "${opt_auth_protocol}" ] && ini_set "$file" keystone_authtoken auth_protocol ${opt_auth_protocol}
+ini_set "$file" keystone_authtoken identity_uri ${keystone_admin_unversioned}
+ini_set "$file" keystone_authtoken auth_uri ${keystone_public_unversioned}
+ini_set "$file" keystone_authtoken admin_tenant_name ${trove_tenant}
+ini_set "$file" keystone_authtoken admin_password ${trove_password}
+ini_set "$file" keystone_authtoken admin_user ${trove_user}
 
 # Get information out of keystone and put in trove conf files.
 function keystone_cmd {
