@@ -6,14 +6,10 @@
 #
 
 class tesora_mistral::configure_mistral {
-  # Replace the mistral-setup.sh that comes in the package.
-  file { '/opt/tesora/dbaas/bin/mistral-setup.sh':
-    ensure => absent,
-  }
 
-  file { '/opt/tesora/dbaas/bin/fuel_dbaas_mistral-setup.sh':
+  file { '/opt/tesora/dbaas/bin/fuel_dbaas_mistral_setup.sh':
     ensure => present,
-    source => 'puppet:///modules/tesora_mistral/mistral-setup.sh',
+    source => 'puppet:///modules/tesora_mistral/mistral_setup.sh',
   }
 
   file { '/tmp/mistral_setup.cfg':
@@ -22,9 +18,9 @@ class tesora_mistral::configure_mistral {
   }
 
   exec { 'install':
-    command   => "/opt/tesora/dbaas/bin/fuel_dbaas_mistral-setup.sh /tmp/mistral_setup.cfg ${::primary_controller}",
+    command   => "/opt/tesora/dbaas/bin/fuel_dbaas_mistral_setup.sh /tmp/mistral_setup.cfg ${::primary_controller}",
     logoutput => true,
-    require   => [ File['/opt/tesora/dbaas/bin/fuel_dbaas_mistral-setup.sh'], File['/tmp/mistral_setup.cfg'] ],
+    require   => [ File['/opt/tesora/dbaas/bin/fuel_dbaas_mistral_setup.sh'], File['/tmp/mistral_setup.cfg'] ],
     onlyif    => '/usr/bin/test True',
     notify    => [ Service['mistral-api'], Service['mistral-engine'], Service['mistral-executor'] ]
   }
