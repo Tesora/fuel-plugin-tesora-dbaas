@@ -44,6 +44,7 @@ class tesora_dbaas (
       os_user             => $keystone_admin_user,
       os_pass             => $keystone_admin_pass,
       os_tenant_name      => $keystone_admin_tenant,
+      os_region           => $trove_region,
       guest_download_user => $guest_download_user,
       guest_download_pass => $guest_download_pass,
       dbaas_release       => 'enterprise',
