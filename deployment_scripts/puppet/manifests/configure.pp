@@ -25,7 +25,7 @@ $keystone_admin_user   = $access_hash['user']
 $keystone_admin_pass   = $access_hash['password']
 $keystone_admin_tenant = $access_hash['tenant']
 
-$keystone_url_version = "v3"
+$keystone_url_version = "v2.0"
 $keystone_public_protocol = get_ssl_property($ssl_hash, $public_ssl_hash, 'keystone', 'public', 'protocol', 'http')
 $keystone_public_address  = get_ssl_property($ssl_hash, $public_ssl_hash, 'keystone', 'public', 'hostname', [$ip_public])
 $keystone_public_url         = "${keystone_public_protocol}://${keystone_public_address}:5000/${keystone_url_version}"
