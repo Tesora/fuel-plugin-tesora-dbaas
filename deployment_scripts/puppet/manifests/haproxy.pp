@@ -51,3 +51,10 @@ openstack::ha::haproxy_service { 'trove-rabbitmq':
   },
   balancermember_options => 'check inter 5000 rise 2 fall 3',
 }
+
+# Make sure services are running for haproxy
+service { haproxy:
+    ensure => running,
+    subscribe => [ File["/etc/haproxy/conf.d/210-tesora-dbaas.cfg"], File["/etc/haproxy/conf.d/211-trove-rabbitmq.cfg"] ],
+}
+
