@@ -31,10 +31,16 @@ openstack::ha::haproxy_service { 'mistral':
   public_ssl             => $public_ssl_hash['services'],
   public_ssl_path        => $public_ssl_path,
   public_virtual_ip      => $ip_public,
-  internal_virtual_ip    => '127.0.0.1',
+  internal_virtual_ip    => [ $ip_management, '127.0.0.1' ],
   haproxy_config_options => {
       'http-request' => 'set-header X-Forwarded-Proto https if { ssl_fc }',
   },
+}
+
+# Make sure haproxy service is running
+service { haproxy:
+    ensure => running,
+    subscribe => File["/etc/haproxy/conf.d/210-mistral.cfg"],
 }
 
 $haproxy_stats_url = "http://${ip_management}:10000/;csv"
