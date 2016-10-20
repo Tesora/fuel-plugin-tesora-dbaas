@@ -26,8 +26,9 @@ $public_protocol = $public_ssl_hash['services'] ? {
   true    => 'https',
   default => 'http',
 }
-$public_url         = "${public_protocol}://${public_address}:${mistral_api_port}/v2"
-$admin_url          = "http://${admin_address}:${mistral_api_port}/v2"
+$mistral_url_version = "v2"
+$public_url         = "${public_protocol}://${public_address}:${mistral_api_port}/${mistral_url_version}"
+$admin_url          = "http://${admin_address}:${mistral_api_port}/${mistral_url_version}"
 
 Class['::osnailyfacter::wait_for_keystone_backends'] -> Keystone_service['mistral']
 
