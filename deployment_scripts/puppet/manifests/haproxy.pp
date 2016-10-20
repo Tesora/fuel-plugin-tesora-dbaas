@@ -35,6 +35,12 @@ openstack::ha::haproxy_service { 'tesora-dbaas':
   },
 }
 
+# Make sure tesora haproxy service is running
+service { haproxy:
+    ensure => running,
+    subscribe => File["/etc/haproxy/conf.d/210-tesora-dbaas.cfg"],
+}
+
 openstack::ha::haproxy_service { 'trove-rabbitmq':
   order                  => '211',
   listen_port            => 55671,
@@ -50,4 +56,9 @@ openstack::ha::haproxy_service { 'trove-rabbitmq':
     'mode'           => 'tcp'
   },
   balancermember_options => 'check inter 5000 rise 2 fall 3',
+}
+# Make sure trove rabbitmq service is running
+service { rabbitmq:
+    ensure => running,
+    subscribe => File["/etc/haproxy/conf.d/211-trove-rabbitmq.cfg"],
 }
