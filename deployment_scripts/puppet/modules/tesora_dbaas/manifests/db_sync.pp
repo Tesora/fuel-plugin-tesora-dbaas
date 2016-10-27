@@ -16,7 +16,7 @@ class tesora_dbaas::db_sync (
   require 'mysql::bindings'
   require 'mysql::bindings::python'
 
-  file { "/etc/trove/trove_dbsync.conf":
+  file { '/etc/trove/trove_dbsync.conf':
     ensure  => file,
     content => template('tesora_dbaas/trove_dbsync.conf.erb')
   }

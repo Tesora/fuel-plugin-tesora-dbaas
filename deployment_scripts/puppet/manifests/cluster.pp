@@ -1,8 +1,11 @@
-notice('MODULAR: trove/cluster.pp')
+#
+# Copyright (c) 2016 Tesora Inc.  All Rights Reserved.
+#
+# All use, reproduction, transfer, publication or disclosure is prohibited
+# except as may be expressly permitted in the applicable license agreement.
+#
 
-if !(hiera('role') in ['tesora-dbaas']) {
-    fail('The node role is not in trove roles')
-}
+notice('tesora_dbaas cluster.pp')
 
 $network_scheme = hiera_hash('network_scheme', {})
 $network_metadata = hiera_hash('network_metadata', {})
@@ -15,13 +18,18 @@ $corosync_nodes   = corosync_nodes($trove_node, 'trove/api')
 
 $network_ip       = get_network_role_property('trove/api', 'ipaddr')
 
-class { 'cluster':
-  internal_address => $network_ip,
-  corosync_nodes   => $corosync_nodes,
+$corosync_nodes_processed = corosync_nodes_process($corosync_nodes)
+
+class { '::cluster':
+  internal_address         => get_network_role_property('trove/api', 'ipaddr'),
+  quorum_members           => $corosync_nodes_processed['ips'],
+  unicast_addresses        => $corosync_nodes_processed['ips'],
+  quorum_members_ids       => $corosync_nodes_processed['ids'],
+  cluster_recheck_interval => $cluster_recheck_interval,
 }
 
 pcmk_nodes { 'pacemaker' :
-  nodes => $corosync_nodes,
+  nodes               => $corosync_nodes,
   add_pacemaker_nodes => false,
 }
 

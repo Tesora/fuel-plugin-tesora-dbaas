@@ -5,6 +5,8 @@
 # except as may be expressly permitted in the applicable license agreement.
 #
 
+notice('tesora_dbaas haproxy.pp')
+
 $network_metadata = hiera_hash('network_metadata', {})
 $ip_management    = hiera('management_vip')
 $ip_public        = hiera('public_vip')
@@ -49,3 +51,10 @@ openstack::ha::haproxy_service { 'trove-rabbitmq':
   },
   balancermember_options => 'check inter 5000 rise 2 fall 3',
 }
+
+# Make sure services are running for haproxy
+service { haproxy:
+    ensure => running,
+    subscribe => [ File["/etc/haproxy/conf.d/210-tesora-dbaas.cfg"], File["/etc/haproxy/conf.d/211-trove-rabbitmq.cfg"] ],
+}
+
