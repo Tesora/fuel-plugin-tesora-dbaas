@@ -24,11 +24,12 @@ class tesora_dbaas::config_client (
 ) {
 
   osnailyfacter::credentials_file { '/root/openrc':
-    admin_user          => $os_user,
-    admin_password      => $os_pass,
-    admin_tenant        => $os_tenant_name,
-    region_name         => $os_region,
-    auth_url            => $os_auth_url,
+    admin_user           => $os_user,
+    admin_password       => $os_pass,
+    admin_tenant         => $os_tenant_name,
+    region_name          => $os_region,
+    auth_url             => $os_auth_url,
+    glance_endpoint_type => 'internal',
   }
 
   file { '/tmp/tesoradbaasrc.sh':
