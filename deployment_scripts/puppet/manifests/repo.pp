@@ -6,7 +6,7 @@
 
 notice('tesora_dbaas repo.pp')
 
-apt::pin { 'fuel-plugin-tesora-dbaas-1.9.0':
+apt::pin { 'fuel-plugin-tesora-dbaas-DBAAS_VERSION_LONG':
     priority        => 1100,
     label           => 'fuel-plugin-tesora-dbaas',
     release_version => '1.9',
