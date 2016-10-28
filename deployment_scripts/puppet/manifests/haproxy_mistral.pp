@@ -53,7 +53,9 @@ $lb_defaults = { 'provider' => 'haproxy', 'url' => $haproxy_stats_url }
 $lb_hash = {
   mistral      => {
     name     => 'mistral',
-    url      => $lb_url
+    url      => $lb_url,
+    count    => 60,
+    step     => 1,
   }
 }
 
