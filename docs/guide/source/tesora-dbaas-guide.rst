@@ -1,5 +1,5 @@
 **********************************************************************
-Guide to the Tesora DBaaS Platform Plugin version 1.9-1.9.0-1 for Fuel
+Guide to the Tesora DBaaS Platform Plugin version 1.9-1.9.5-1 for Fuel
 **********************************************************************
 
 This document provides instructions for installing, configuring and using
@@ -34,7 +34,7 @@ Requirements
 ===============================  ===============
 Requirement                      Version/Comment
 ===============================  ===============
-Fuel                             8.0
+Fuel                             9.0
 ===============================  ===============
 
 Pre-requisites
@@ -66,21 +66,21 @@ To install the Tesora DBaaS Platform Fuel plugin, follow these steps:
 #. Copy the plugin to an already installed
    `Fuel Master node <http://docs.openstack.org/developer/fuel-docs/userdocs/fuel-install-guide/install_install_fuel.html>`_::
 
-   # scp fuel-plugin-tesora-dbaas-1.9-1.9.0-1.noarch.rpm root@:/\<fuel master node IP>:/tmp
+   # scp fuel-plugin-tesora-dbaas-1.9-1.9.5-1.noarch.rpm root@:/\<fuel master node IP>:/tmp
 
 #. Log into the Fuel Master node.
 
 #. Install the plugin::
 
      # cd /tmp
-     # fuel plugins --install fuel-plugin-tesora-dbaas-1.9-1.9.0-1.noarch.rpm
+     # fuel plugins --install fuel-plugin-tesora-dbaas-1.9-1.9.5-1.noarch.rpm
 
 #. Check if the plugin was installed successfully::
 
      # fuel plugins
      id | name                     | version | package_version
      ---|--------------------------|---------|----------------
-     1  | fuel-plugin-tesora-dbaas | 1.9.0   | 4.0.0
+     1  | fuel-plugin-tesora-dbaas | 1.9.5   | 4.0.0
 
 #. Create a new Fuel environment using the Fuel UI Wizard.
 
@@ -108,7 +108,7 @@ To install the Tesora DBaaS Platform Fuel plugin, follow these steps:
 #. Perform network validation on your new fuel environment.
 
 #. Deploy your Fuel environment containing the Tesora DBaaS Platform.
-   Once provisioned launch Horizon. You should see additional screens in Horizon for Tesora Databases:
+   Once provisioned launch Horizon. You should see additional screens in Horizon for Database:
 
    .. image:: figures/horizon-tesora.png
       :width: 75%
@@ -142,86 +142,93 @@ To install a datastore for say `mysql 5.6`, follow these steps:
    ::
 
      # ./add-datastore.sh mysql 5.6
-
-     Installing guest 'tesora-ubuntu-trusty-mysql-5.6-EE-1.9'
-
+     
+     Add datastore mysql 5.6 to Tesora DBaaS
+     
+     Selecting guest based on platform, command line args and environment variables:
+         Platform OS              ubuntu
+         Guest OS                 ubuntu
+         Tesora DBaaS Release     enterprise
+         Tesora DBaaS Version     1.9
+         Tesora DBaaS Repository  main
+     
+     Checking connectivity to Glance service
+     
+     Guest name determined as 'tesora-ubuntu-trusty-mysql-5.6-EE-1.9'
+     
+     
      Downloading guest 'tesora-ubuntu-trusty-mysql-5.6-EE-1.9.guest'
-     --2016-04-07 19:38:22--  ftp://enterprise19:*password*@ftp.tesora.com/main/ubuntu\
-     /tesora-ubuntu-trusty-mysql-5.6-EE-1.9.guest
-                => ‘/tmp/tmp.D8MAY4AlsW’
+     --2016-11-01 15:10:07--  ftp://enterprise19:*password*@ftp.tesora.com/main/ubuntu/tesora-ubuntu-trusty-mysql-5.6-EE-1.9.guest
+                => ‘/tmp/tmp.PwTR8Ov3Cs’
      Resolving ftp.tesora.com (ftp.tesora.com)... 199.182.122.232
      Connecting to ftp.tesora.com (ftp.tesora.com)|199.182.122.232|:21... connected.
      Logging in as enterprise19 ... Logged in!
      ==> SYST ... done.    ==> PWD ... done.
      ==> TYPE I ... done.  ==> CWD (1) /main/ubuntu ... done.
-     ==> SIZE tesora-ubuntu-trusty-mysql-5.6-EE-1.9.guest ... 510402560
-     ==> PASV ... done.    ==> RETR tesora-ubuntu-trusty-mysql-5.6-EE-1.9.guest ... \
-     done.
-     Length: 510402560 (487M) (unauthoritative)
-
-     100%[=============================================>] 510,402,560 4.14MB/s   in 98s
-
-     2016-04-07 19:40:00 (4.95 MB/s) - ‘/tmp/tmp.D8MAY4AlsW’ saved [510402560]
-
-     Moving guest '/tmp/tmp.D8MAY4AlsW' into guest cache
-     Uploading guest 'tesora-ubuntu-trusty-mysql-5.6-EE-1.9-86' to Glance
-     +---------------------------+------------------------------------------+
-     | Property                  | Value                                    |
-     +---------------------------+------------------------------------------+
-     | checksum                  | 1c3f5610863e30dd3d11deddd5be1eca         |
-     | container_format          | bare                                     |
-     | created_at                | 2016-04-07T19:40:05Z                     |
-     | disk_format               | qcow2                                    |
-     | id                        | dfff7c84-136e-4889-b772-e690c23c8686     |
-     | min_disk                  | 0                                        |
-     | min_ram                   | 0                                        |
-     | name                      | tesora-ubuntu-trusty-mysql-5.6-EE-1.9-86 |
-     | owner                     | 189b882e615b4ac998fc7fe7ddf25b79         |
-     | protected                 | False                                    |
-     | size                      | 510328832                                |
-     | status                    | active                                   |
-     | tags                      | []                                       |
-     | tesora-agent-build        | 130                                      |
-     | tesora-agent-full-version | 1.9.0                                    |
-     | tesora-agent-version      | 1.9                                      |
-     | tesora-database           | mysql                                    |
-     | tesora-database-version   | 5.6                                      |
-     | tesora-edition            | enterprise                               |
-     | tesora-edition-short      | EE                                       |
-     | tesora-guest-image-build  | 86                                       |
-     | tesora-os-distro          | ubuntu                                   |
-     | tesora-os-distro-version  | trusty                                   |
-     | tesora-repository         | main                                     |
-     | updated_at                | 2016-04-07T19:40:51Z                     |
-     | virtual_size              | None                                     |
-     | visibility                | public                                   |
-     +---------------------------+------------------------------------------+
-     Guest 'tesora-ubuntu-trusty-mysql-5.6-EE-1.9-86 uploaded to Glance with ID \
-     'dfff7c84-136e-4889-b772-e690c23c8686'
-
+     ==> SIZE tesora-ubuntu-trusty-mysql-5.6-EE-1.9.guest ... 502609920
+     ==> PASV ... done.    ==> RETR tesora-ubuntu-trusty-mysql-5.6-EE-1.9.guest ... done.
+     Length: 502609920 (479M) (unauthoritative)
+     
+     100%[======================================>] 502,609,920 16.9MB/s   in 27s    
+     
+     2016-11-01 15:10:34 (17.7 MB/s) - ‘/tmp/tmp.PwTR8Ov3Cs’ saved [502609920]
+     
+     
+     Moving guest '/tmp/tmp.PwTR8Ov3Cs' into guest cache
+     
+     Uploading guest 'tesora-ubuntu-trusty-mysql-5.6-EE-1.9-75' to Glance
+     [=============================>] 100%
+     +------------------------------+------------------------------------------+
+     | Property                     | Value                                    |
+     +------------------------------+------------------------------------------+
+     | checksum                     | b03598ecd8b0840c7794acae95b85471         |
+     | container_format             | bare                                     |
+     | created_at                   | 2016-11-01T15:10:31Z                     |
+     | disk_format                  | qcow2                                    |
+     | id                           | 68ceb1df-f65e-4806-a4a4-0df38445f479     |
+     | min_disk                     | 0                                        |
+     | min_ram                      | 0                                        |
+     | name                         | tesora-ubuntu-trusty-mysql-5.6-EE-1.9-75 |
+     | owner                        | 1274ced4337a4700a7b27a156c0a318b         |
+     | protected                    | False                                    |
+     | size                         | 502530048                                |
+     | status                       | active                                   |
+     | tags                         | []                                       |
+     | tesora-agent-build           | 137                                      |
+     | tesora-agent-full-version    | 1.9.5                                    |
+     | tesora-agent-version         | 1.9                                      |
+     | tesora-database              | mysql                                    |
+     | tesora-database-version      | 5.6                                      |
+     | tesora-database-version_long | 5.6.33                                   |
+     | tesora-edition               | enterprise                               |
+     | tesora-edition-short         | EE                                       |
+     | tesora-guest-image-build     | 75                                       |
+     | tesora-os-distro             | ubuntu                                   |
+     | tesora-os-distro-version     | trusty                                   |
+     | tesora-repository            | main                                     |
+     | updated_at                   | 2016-11-01T15:11:18Z                     |
+     | virtual_size                 | None                                     |
+     | visibility                   | public                                   |
+     +------------------------------+------------------------------------------+
+     
+     Guest 'tesora-ubuntu-trusty-mysql-5.6-EE-1.9-75 uploaded to Glance with ID '68ceb1df-f65e-4806-a4a4-0df38445f479'
+     
      Creating datastore 'mysql'
-     No handlers could be found for logger "oslo_config.cfg"
      Datastore 'mysql' updated.
-
-     Adding datastore version '5.6-86' to datastore 'mysql' with manager 'mysql'
-     No handlers could be found for logger "oslo_config.cfg"
-     Datastore version '5.6-86' updated.
-
-     Making '5.6-86' the default version for datastore 'mysql'
-     No handlers could be found for logger "oslo_config.cfg"
+     
+     Adding datastore version '5.6-75' to datastore 'mysql' with manager 'mysql'
+     Datastore version '5.6-75' updated.
+     
+     Making '5.6-75' the default version for datastore 'mysql'
      Datastore 'mysql' updated.
-
-     Loading validation rule file for datastore 'mysql' with version '5.6-86'.
-     No handlers could be found for logger "oslo_config.cfg"
-     Loading config parameters for datastore (mysql) version (5.6-86)
-
+     
+     Loading validation rule file '/usr/lib/python2.7/dist-packages/trove/templates/mysql/validation-rules.json'.
+     Loading config parameters for datastore (mysql) version (5.6-75)
+     
      Add datastore complete...
-
-     Guest image for mysql 5.6 uploaded to glance as:
-         Name: tesora-ubuntu-trusty-mysql-5.6-EE-1.9-86
-         ID:   dfff7c84-136e-4889-b772-e690c23c8686
-     mysql datastore created with version 5.6-86
-     Done.
+     
+     Guest image for 'mysql' '5.6' uploaded to glance as: tesora-ubuntu-trusty-mysql-5.6-EE-1.9-75
+     Datastore 'mysql' created with version '5.6-75'
 
 .. Note::
    If the download fails with a `Login incorrect` error then most likely the username or password entered in the setting screen were incorrect.
@@ -234,7 +241,7 @@ To view the installed and available datastores in horizon, follow these steps:
 
 #. Login to the Horizon console.
 
-#. Navigate to Project -> Tesora Databases -> Datastores.
+#. Navigate to Project -> Database -> Datastores.
 
 #. The table shows the installed and available datastores.
 
@@ -248,7 +255,7 @@ To create a database instance based off an available datastore, follow these ste
 
 #. Login to the Horizon console.
 
-#. Navigate to Project -> Tesora Database -> Instances.
+#. Navigate to Project -> Database -> Instances.
 
 #. Select the `Launch Instance` button.
 
