@@ -149,7 +149,7 @@
   version: 2.0.0
   type: puppet
   groups: [tesora-dbaas]
-  requires: [rabbitmq, tesora-dbaas-rabbitmq, tesora-dbaas-install-packages]
+  requires: [rabbitmq, tesora-dbaas-rabbitmq, tesora-dbaas-install-packages, tesora-dbaas-db-sync]
   required_for: [deploy_end]
   cross-depends:
     - name: tesora-dbaas-keystone
@@ -177,7 +177,7 @@
   version: 2.0.0
   type: puppet
   groups: [tesora-dbaas]
-  requires: [tesora-dbaas-configure]
+  requires: [tesora-dbaas-install-packages]
   required_for: [deploy_end]
   cross-depends:
     - name: tesora-dbaas-db
