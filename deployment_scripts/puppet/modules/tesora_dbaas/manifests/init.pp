@@ -47,8 +47,8 @@ class tesora_dbaas (
       os_region           => $trove_region,
       guest_download_user => $guest_download_user,
       guest_download_pass => $guest_download_pass,
-      dbaas_release       => 'enterprise',
-      dbaas_version       => '1.9',
-      dbaas_repo          => 'main',
+      dbaas_release       => DBAAS_RELEASE,
+      dbaas_version       => DBAAS_VERSION,
+      dbaas_repo          => DBAAS_REPO,
     }
 }
