@@ -106,8 +106,8 @@ class tesora_dbaas::rabbitmq(
     $firewall_rule = '240 tesora_dbaas_rabbitmq'
 
     firewall { $firewall_rule :
-      dport => $port,
-      proto => 'tcp',
+      dport  => $port,
+      proto  => 'tcp',
       action => 'accept',
     }
   }
