@@ -61,7 +61,7 @@ Tesora DBaaS Platform plugin installation
 
 To install the Tesora DBaaS Platform Fuel plugin, follow these steps:
 
-#. Download the plugin from the `Fuel Plugins Catalog <https://www.mirantis.com/products/openstack-drivers-and-plugins/fuel-plugins/>`_.
+#. Download the plugin from the `Partner Community Catalog <https://www.mirantis.com/partners/tesora/>`_.
 
 #. Copy the plugin to an already installed
    `Fuel Master node <http://docs.openstack.org/developer/fuel-docs/userdocs/fuel-install-guide/install_install_fuel.html>`_::
@@ -91,7 +91,7 @@ To install the Tesora DBaaS Platform Fuel plugin, follow these steps:
    .. Note::
       You should have received a username and password from Tesora via email
       when you registered for your trial of Tesora DBaaS Enterprise Edition.
-      You can register for a 60 day trial
+      You can register for a 30 day trial
       `here <http://resources.tesora.com/download-free-trial-tesora-dbaas-platform-enterprise-edition>`_.
 
    You will also need to accept the `Tesora, Inc. Terms of Use` by entering `I AGREE` in the terms of use field.
