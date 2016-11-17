@@ -91,7 +91,7 @@ To install the Tesora DBaaS Platform Fuel plugin, follow these steps:
    .. Note::
       You should have received a username and password from Tesora via email
       when you registered for your trial of Tesora DBaaS Enterprise Edition.
-      You can register for a 60 day trial
+      You can register for a 30 day trial
       `here <http://resources.tesora.com/download-free-trial-tesora-dbaas-platform-enterprise-edition>`_.
 
    You will also need to accept the `Tesora, Inc. Terms of Use` by entering `I AGREE` in the terms of use field.
