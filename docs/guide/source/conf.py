@@ -202,7 +202,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('tesora-dbaas-guide', 'tesora-dbaas-guide.tex', u'Tesora DBaaS Platform plugin for Fuel Documentation',
+  ('tesora-dbaas-guide', 'fuel-plugin-tesora-dbaas-' + release + '.noarch.tex', u'Tesora DBaaS Platform plugin for Fuel Documentation',
    u'Tesora, Inc.', 'manual'),
 ]
 
