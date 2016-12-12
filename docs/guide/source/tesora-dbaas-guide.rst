@@ -45,7 +45,7 @@ Pre-requisites
 
 * Use of the Tesora DBaaS Fuel plugin requires that you have previously
   registered for a trial of `Tesora DBaaS Enterprise Edition
-  <http://resources.tesora.com/download-free-trial-tesora-dbaas-platform-enterprise-edition>`_.
+  <http://resources.tesora.com/tesora-dbaas-platform-fuel-plugin>`_.
 
 Limitations
 -----------
@@ -61,7 +61,7 @@ Tesora DBaaS Platform plugin installation
 
 To install the Tesora DBaaS Platform Fuel plugin, follow these steps:
 
-#. Download the plugin from the `Fuel Plugins Catalog <https://www.mirantis.com/products/openstack-drivers-and-plugins/fuel-plugins/>`_.
+#. Download the plugin from the `Tesora DBaaS Fuel Plugin <http://resources.tesora.com/tesora-dbaas-platform-fuel-plugin>`_.
 
 #. Copy the plugin to an already installed
    `Fuel Master node <http://docs.openstack.org/developer/fuel-docs/userdocs/fuel-install-guide/install_install_fuel.html>`_::
@@ -91,8 +91,8 @@ To install the Tesora DBaaS Platform Fuel plugin, follow these steps:
    .. Note::
       You should have received a username and password from Tesora via email
       when you registered for your trial of Tesora DBaaS Enterprise Edition.
-      You can register for a 60 day trial
-      `here <http://resources.tesora.com/download-free-trial-tesora-dbaas-platform-enterprise-edition>`_.
+      You can register for a 30 day trial
+      `here <http://resources.tesora.com/tesora-dbaas-platform-fuel-plugin>`_.
 
    You will also need to accept the `Tesora, Inc. Terms of Use` by entering `I AGREE` in the terms of use field.
 
@@ -286,7 +286,7 @@ Appendix
 +----+----------------------------+-------------------------------------------------------------------------------------------------------------------------+
 | #  | Title of resource          | Link on resource                                                                                                        |
 +====+============================+=========================================================================================================================+
-| 1  | Tesora Download Free Trial | `Link <http://resources.tesora.com/download-free-trial-tesora-dbaas-platform-enterprise-edition/>`_                     |
+| 1  | Tesora Download Free Trial | `Link <http://resources.tesora.com/tesora-dbaas-platform-fuel-plugin>`_                     |
 +----+----------------------------+-------------------------------------------------------------------------------------------------------------------------+
 | 2  | Tesora Certified Databases | `Link <http://www.tesora.com/openstack-trove-certified-databases/>`_                                                    |
 +----+----------------------------+-------------------------------------------------------------------------------------------------------------------------+
